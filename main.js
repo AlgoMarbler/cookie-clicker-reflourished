@@ -5444,14 +5444,14 @@ Game.Launch=function()
 					
 					//select an effect
 					var list=[];
-					if (me.wrath>0) list.push('clot','multiply cookies','ruin cookies');
+					if (me.wrath>0 || Math.random()<0.25) list.push('clot','multiply cookies','ruin cookies');
 					else list.push('frenzy','multiply cookies');
 					if (me.wrath>0 && Game.hasGod && Game.hasGod('scorn')) list.push('clot','ruin cookies','clot','ruin cookies');
 					if (me.wrath>0 && Math.random()<0.3) list.push('blood frenzy','chain cookie','cookie storm');
 					else if (Math.random()<0.03 && Game.cookiesEarned>=100000) list.push('chain cookie','cookie storm');
 					if (Math.random()<0.05 && Game.season=='fools') list.push('everything must go');
-					if (Math.random()<0.1 && (Math.random()<0.05 || !Game.hasBuff('Dragonflight'))) list.push('click frenzy');
-					if (me.wrath && Math.random()<0.1) list.push('cursed finger');
+					if (Math.random()<0.65) list.push('click frenzy');
+					if (Math.random()<0.3) list.push('cursed finger');
 					
 					if (Game.BuildingsOwned>=10 && Math.random()<0.25) list.push('building special');
 					
@@ -5542,7 +5542,7 @@ Game.Launch=function()
 					}
 					else if (choice=='frenzy')
 					{
-						buff=Game.gainBuff('frenzy',Math.ceil(77*effectDurMod),7);
+						buff=Game.gainBuff('frenzy',Math.ceil(50*effectDurMod),13);
 					}
 					else if (choice=='dragon harvest')
 					{
@@ -5554,13 +5554,13 @@ Game.Launch=function()
 					}
 					else if (choice=='multiply cookies')
 					{
-						var moni=mult*Math.min(Game.cookies*0.15,Game.cookiesPs*60*15)+13;//add 15% to cookies owned (+13), or 15 minutes of cookie production - whichever is lowest
+						var moni=mult*Math.min(Game.cookies*20,Game.cookiesPs*60*8)+13;//add 2000% to cookies owned (+13), or 8 minutes of cookie production - whichever is lowest
 						Game.Earn(moni);
 						popup=loc("Lucky!")+'<br><small>'+loc("+%1!",loc("%1 cookie",LBeautify(moni)))+'</small>';
 					}
 					else if (choice=='ruin cookies')
 					{
-						var moni=Math.min(Game.cookies*0.05,Game.cookiesPs*60*10)+13;//lose 5% of cookies owned (-13), or 10 minutes of cookie production - whichever is lowest
+						var moni=Math.min(Game.cookies*0.50,Game.cookiesPs*60*5)+13;//lose 50% of cookies owned (-13), or 5 minutes of cookie production - whichever is lowest
 						moni=Math.min(Game.cookies,moni);
 						Game.Spend(moni);
 						popup=loc("Ruin!")+'<br><small>'+loc("Lost %1!",loc("%1 cookie",LBeautify(moni)))+'</small>';
@@ -5571,7 +5571,7 @@ Game.Launch=function()
 					}
 					else if (choice=='clot')
 					{
-						buff=Game.gainBuff('clot',Math.ceil(66*effectDurMod),0.5);
+						buff=Game.gainBuff('clot',Math.ceil(180*effectDurMod),0.5);
 					}
 					else if (choice=='cursed finger')
 					{
@@ -5579,7 +5579,7 @@ Game.Launch=function()
 					}
 					else if (choice=='click frenzy')
 					{
-						buff=Game.gainBuff('click frenzy',Math.ceil(13*effectDurMod),777);
+						buff=Game.gainBuff('click frenzy',Math.ceil(50*effectDurMod),67);
 					}
 					else if (choice=='dragonflight')
 					{
@@ -5600,7 +5600,7 @@ Game.Launch=function()
 						this.totalFromChain+=moni;
 
 						//break the chain if we're above 5 digits AND it's more than 50% of our bank, it grants more than 6 hours of our CpS, or just a 1% chance each digit (update : removed digit limit)
-						if (Math.random()<0.01 || nextMoni>=maxPayout)
+						if (nextMoni>=maxPayout)
 						{
 							this.chain=0;
 							popup=loc("Cookie chain")+'<br><small>'+loc("+%1!",loc("%1 cookie",LBeautify(moni)))+'<br>'+loc("Cookie chain over. You made %1.",loc("%1 cookie",LBeautify(this.totalFromChain)))+'</small>';
@@ -5677,8 +5677,9 @@ Game.Launch=function()
 				maxTime:0,
 				getTimeMod:function(me,m)
 				{
-					if (Game.Has('Lucky day')) m/=2;
-					if (Game.Has('Serendipity')) m/=2;
+					m /= 3;
+					if (Game.Has('Lucky day')) m/=1.5;
+					if (Game.Has('Serendipity')) m/=1.5;
 					if (Game.Has('Golden goose egg')) m*=0.95;
 					if (Game.Has('Heavenly luck')) m*=0.95;
 					if (Game.Has('Green yeast digestives')) m*=0.99;
