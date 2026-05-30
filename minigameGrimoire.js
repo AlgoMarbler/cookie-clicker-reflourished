@@ -49,7 +49,7 @@ M.launch=function()
 				{
 					var newShimmer=new Game.shimmer('golden',{noWrath:true});
 					var choices=[];
-					choices.push('frenzy','multiply cookies');
+					choices.push('frenzy','multiply cookies', 'long frenzy');
 					if (!Game.hasBuff('Dragonflight')) choices.push('click frenzy');
 					if (Math.random()<0.1) choices.push('cookie storm','cookie storm','blab');
 					if (Game.BuildingsOwned>=10 && Math.random()<0.25) choices.push('building special');
