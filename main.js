@@ -5444,15 +5444,16 @@ Game.Launch=function()
 					
 					//select an effect
 					var list=[];
-					if (me.wrath>0 || Math.random()<0.25) list.push('clot','multiply cookies','ruin cookies');
+					if (me.wrath>0) list.push('clot','multiply cookies','ruin cookies');
 					else list.push('frenzy','multiply cookies');
 					if (me.wrath>0 && Game.hasGod && Game.hasGod('scorn')) list.push('clot','ruin cookies','clot','ruin cookies');
 					if (me.wrath>0 && Math.random()<0.1) list.push('blood frenzy','chain cookie','cookie storm');
 					else if (Math.random()<0.03 && Game.cookiesEarned>=100000) list.push('chain cookie','cookie storm');
 					if (Math.random()<0.05 && Game.season=='fools') list.push('everything must go');
 					if (Math.random()<0.15) list.push('click frenzy');
-					if (Math.random()<0.35) list.push('long frenzy');
-					if (Math.random()<0.3) list.push('cursed finger');
+					if (Math.random()<0.5) list.push('long frenzy');
+					if (Math.random()<0.15) list.push('supercharge');
+					if (Math.random()<0.05) list.push('cursed finger');
 					
 					if (Game.BuildingsOwned>=10 && Math.random()<0.25) list.push('building special');
 				
@@ -5547,7 +5548,11 @@ Game.Launch=function()
 					}
 					else if (choice=='long frenzy')
 					{
-						buff=Game.gainBuff('long frenzy',Math.ceil(367*effectDurMod),1.5);
+						buff=Game.gainBuff('long frenzy',Math.ceil(367*effectDurMod),2.5);
+					}
+					else if (choice=='supercharge')
+					{
+						buff=Game.gainBuff('supercharge',Math.ceil(13*effectDurMod),67);
 					}
 					else if (choice=='dragon harvest')
 					{
@@ -5559,13 +5564,13 @@ Game.Launch=function()
 					}
 					else if (choice=='multiply cookies')
 					{
-						var moni=mult*Math.min(Game.cookies*20,Game.cookiesPs*60*8)+13;//add 2000% to cookies owned (+13), or 8 minutes of cookie production - whichever is lowest
+						var moni=mult*Math.min(Game.cookies*20,Game.cookiesPs*60*8)+67;//add 2000% to cookies owned (+13), or 8 minutes of cookie production - whichever is lowest
 						Game.Earn(moni);
 						popup=loc("Lucky!")+'<br><small>'+loc("+%1!",loc("%1 cookie",LBeautify(moni)))+'</small>';
 					}
 					else if (choice=='ruin cookies')
 					{
-						var moni=Math.min(Game.cookies*0.50,Game.cookiesPs*60*5)+13;//lose 50% of cookies owned (-13), or 5 minutes of cookie production - whichever is lowest
+						var moni=Math.min(Game.cookies*0.50,Game.cookiesPs*60*5)+67;//lose 50% of cookies owned (-13), or 5 minutes of cookie production - whichever is lowest
 						moni=Math.min(Game.cookies,moni);
 						Game.Spend(moni);
 						popup=loc("Ruin!")+'<br><small>'+loc("Lost %1!",loc("%1 cookie",LBeautify(moni)))+'</small>';
@@ -5873,6 +5878,7 @@ Game.Launch=function()
 		Game.goldenCookieChoices=[
 			"Frenzy","frenzy",
 			"Endurance Frenzy","long frenzy",
+			"Supercharge!","supercharge",
 			"Lucky","multiply cookies",
 			"Ruin","ruin cookies",
 			"Elder frenzy","blood frenzy",
@@ -12989,6 +12995,18 @@ Game.Launch=function()
 		{
 			return {
 				name:'Endurance Frenzy',
+				desc:loc("Cookie production x%1 for %2!",[pow,Game.sayTime(time*Game.fps,-1)]),
+				icon:[10,14],
+				time:time*Game.fps,
+				add:true,
+				multCpS:pow,
+				aura:1
+			};
+		});
+		new Game.buffType('supercharge',function(time,pow)
+		{
+			return {
+				name:'Supercharge!',
 				desc:loc("Cookie production x%1 for %2!",[pow,Game.sayTime(time*Game.fps,-1)]),
 				icon:[10,14],
 				time:time*Game.fps,
