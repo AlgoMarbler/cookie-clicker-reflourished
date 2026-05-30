@@ -5547,7 +5547,7 @@ Game.Launch=function()
 					}
 					else if (choice=='long frenzy')
 					{
-						buff=Game.gainBuff('long frenzy',Math.ceil(350*effectDurMod),2);
+						buff=Game.gainBuff('long frenzy',Math.ceil(367*effectDurMod),1.5);
 					}
 					else if (choice=='dragon harvest')
 					{
