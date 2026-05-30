@@ -6966,7 +6966,63 @@ Game.Launch=function()
 		Game.getNewTicker=function(manual)//note : "manual" is true if the ticker was clicked, but may also be true on startup etc
 		{
 			var list=[];
-			
+			list.push(choose([
+				"News : why love someone if you can't have them?",
+				'News : calculus is love, calculus is life!',
+				'News : now I am become death, the destroyer of worlds!',
+				'News : someone lied in april. Not sure who though, yet.',
+				'News : who needs girls when you have cookies?',
+				'News : news looks like this',
+				"Imagine a rock, moving through deep space. There are no stars or planets. If there's nothing to compare the rock to, is it even moving?",
+			]));
+			list.push(choose([
+				"News : why love someone if you can't have them?",
+				'News : calculus is love, calculus is life!',
+				'News : now I am become death, the destroyer of worlds!',
+				'News : someone lied in april. Not sure who though, yet.',
+				'News : who needs girls when you have cookies?',
+				'News : news looks like this',
+				"Imagine a rock, moving through deep space. There are no stars or planets. If there's nothing to compare the rock to, is it even moving?",
+			]));
+			list.push(choose([
+				"News : why love someone if you can't have them?",
+				'News : calculus is love, calculus is life!',
+				'News : now I am become death, the destroyer of worlds!',
+				'News : someone lied in april. Not sure who though, yet.',
+				'News : who needs girls when you have cookies?',
+				'News : news looks like this',
+				"Imagine a rock, moving through deep space. There are no stars or planets. If there's nothing to compare the rock to, is it even moving?",
+			]));
+			list.push(choose([
+			    'News : cookies are temporary, high grades are forever.',
+			    'News : i came, i saw, i forgot what i was doing.',
+			    'News : if at first you do not succeed, reload the save.',
+			    'News : every bug is a feature waiting for better marketing.',
+			    'News : the voices in my head just requested more cookies.',
+			    'News : reality is overrated anyway.',
+			    'News : there are only 10 kinds of people in the world.',
+			    'News : sleep is just a free trial of death.',
+			    'News : trust me, i did the maths. The maths disagreed.',
+			    'News : somewhere, a calculator is having an existential crisis.',
+			    'News : touching grass remains under investigation.',
+			    'News : i survived another day without reading the manual.',
+			    'News : every masterpiece starts with "surely this will work".',
+			    'News : if nobody sees the mistake, was it really a mistake?',
+			    'News : the cake was a lie, but the cookies are real.',
+			    'News : procrastination speedrun world record shattered again.',
+			    'News : intelligence is knowing calculus. Wisdom is avoiding it.',
+			    'News : one must imagine the cookie clicker happy.',
+			    'News : my source is that i made it up.',
+			    'News : local cookie refuses to be eaten, cites human rights.',
+			    'News : error 404: girls not found.',
+			    'News : the odds were against me. I ignored them.',
+			    'News : everything is a graph if you label the axes.',
+			    'News : i asked the universe for answers. It left me on read.',
+			    'News : scientifically speaking, more cookies is better.',
+			    'News : achievements are just expensive dopamine.',
+			    'News : i fear no man. But that segmentation fault scares me.',
+			    'News : remember: every corpse on mount everest was once motivated.',
+			]));
 			var NEWS=loc("News :").replace(' ','&nbsp;')+' ';
 			
 			if (Game.TickerN%2==0 || Game.cookiesEarned>=10100000000)
@@ -7001,30 +7057,6 @@ Game.Launch=function()
 					}
 					else
 					{
-						list.push(choose([
-						"News : why love someone if you can't have them?",
-						'News : calculus is love, calculus is life!',
-						'News : now I am become death, the destroyer of worlds!',
-						'News : someone lied in april. Not sure who though, yet.',
-						'News : who needs girls when you have cookies?',
-						'News : news looks like this',
-						]));
-						list.push(choose([
-						"News : why love someone if you can't have them?",
-						'News : calculus is love, calculus is life!',
-						'News : now I am become death, the destroyer of worlds!',
-						'News : someone lied in april. Not sure who though, yet.',
-						'News : who needs girls when you have cookies?',
-						'News : news looks like this',
-						]));
-						list.push(choose([
-						"News : why love someone if you can't have them?",
-						'News : calculus is love, calculus is life!',
-						'News : now I am become death, the destroyer of worlds!',
-						'News : someone lied in april. Not sure who though, yet.',
-						'News : who needs girls when you have cookies?',
-						'News : news looks like this',
-						]));
 						if (Game.Objects['Farm'].amount>0) list.push(choose([
 						'News : cookie farms suspected of employing undeclared elderly workforce!',
 						'News : cookie farms release harmful chocolate in our rivers, says scientist!',
