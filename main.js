@@ -234,23 +234,16 @@ var Beautify=function(val,floats)
 	if (output=='0') negative=false;
 	return negative?'-'+output:output+decimal;
 }
-var shortenNumber=function(val)
+var shortenNumber = function(val)
 {
-	//if no scientific notation, return as is, else :
-	//keep only the 5 first digits (plus dot), round the rest
-	//may or may not work properly
-	if (val>=1000000 && isFinite(val))
-	{
-		var num=val.toString();
-		var ind=num.indexOf('e+');
-		if (ind==-1) return val;
-		var str='';
-		for (var i=0;i<ind;i++) {str+=(i<6?num[i]:'0');}
-		str+='e+';
-		str+=num.split('e+')[1];
-		return parseFloat(str);
-	}
-	return val;
+    if (!isFinite(val) || val === 0) return val.toString();
+
+    var parts = Number(val).toExponential(4).split('e');
+
+    return parseFloat(parts[0]) +
+        ' × 10<sup>' +
+        parseInt(parts[1]) +
+        '</sup>';
 }
 
 var SimpleBeautify=function(val)
