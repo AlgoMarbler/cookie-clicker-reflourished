@@ -10589,8 +10589,8 @@ Game.Launch=function()
 		{Game.bgType=id;}
 		
 		Game.AllBGs=[
-			{pic:'bgBlue',name:'Automatic',icon:[0,7]},
-			{pic:'bgBlue',name:'Blue',icon:[21,21]},
+			{pic:'bgBlue2',name:'Automatic',icon:[0,7]},
+			{pic:'bgBlue2',name:'Blue',icon:[21,21]},
 			{pic:'bgRed',name:'Red',icon:[22,21]},
 			{pic:'bgWhite',name:'White',icon:[23,21]},
 			{pic:'bgBlack',name:'Black',icon:[24,21]},
