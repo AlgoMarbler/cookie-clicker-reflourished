@@ -12026,10 +12026,7 @@ Game.Launch=function()
 		new Game.Achievement('Cheated cookies taste awful',loc("Hack in some cookies."),[10,6]);Game.last.pool='shadow';
 		order=11010;
 		new Game.Achievement('Uncanny clicker',loc("Click really, really fast.")+'<q>Well I\'ll be!</q>',[12,0]);
-		order=30600;
-		new Game.Achievement('Speed baking I',loc("Get to <b>%1</b> baked in <b>%2</b>.",[loc("%1 cookie",LBeautify(1e6)),Game.sayTime(60*25*Game.fps)]),[12,5]);
-		new Game.Achievement('Speed baking II',loc("Get to <b>%1</b> baked in <b>%2</b>.",[loc("%1 cookie",LBeautify(1e6)),Game.sayTime(60*15*Game.fps)]),[13,5]);
-		new Game.Achievement('Speed baking III',loc("Get to <b>%1</b> baked in <b>%2</b>.",[loc("%1 cookie",LBeautify(1e6)),Game.sayTime(60*10*Game.fps)]),[14,5]);
+		
 		order=5000;
 		new Game.Achievement('Builder',loc("Own <b>%1</b>.",loc("%1 building",LBeautify(100))),[2,6]);
 		new Game.Achievement('Architect',loc("Own <b>%1</b>.",loc("%1 building",LBeautify(500))),[3,6]);
@@ -12078,6 +12075,11 @@ Game.Launch=function()
 		
 		order=30500;
 		new Game.Achievement('Hardcore',loc("Get to <b>%1</b> baked with <b>no upgrades purchased</b>.",loc("%1 cookie",LBeautify(1e9))),[12,6]);//Game.last.pool='shadow';
+		
+		order=30600;
+		new Game.Achievement('Speed baking I',loc("Get to <b>%1</b> baked in <b>%2</b>.",[loc("%1 cookie",LBeautify(1e6)),Game.sayTime(60*35*Game.fps)]),[12,5]);Game.last.pool='shadow';
+		new Game.Achievement('Speed baking II',loc("Get to <b>%1</b> baked in <b>%2</b>.",[loc("%1 cookie",LBeautify(1e6)),Game.sayTime(60*25*Game.fps)]),[13,5]);Game.last.pool='shadow';
+		new Game.Achievement('Speed baking III',loc("Get to <b>%1</b> baked in <b>%2</b>.",[loc("%1 cookie",LBeautify(1e6)),Game.sayTime(60*15*Game.fps)]),[14,5]);Game.last.pool='shadow';
 		
 		
 		order=61000;
