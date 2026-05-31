@@ -5454,6 +5454,7 @@ Game.Launch=function()
 					if (Math.random()<0.5) list.push('long frenzy');
 					if (Math.random()<0.15) list.push('supercharge');
 					if (Math.random()<0.05) list.push('cursed finger');
+					if (Math.random()<0.2) list.push('dragon essence');
 					
 					if (Game.BuildingsOwned>=10 && Math.random()<0.25) list.push('building special');
 				
@@ -5468,7 +5469,8 @@ Game.Launch=function()
 					}
 					
 					if (this.last!='' && Math.random()<0.8 && list.indexOf(this.last)!=-1) list.splice(list.indexOf(this.last),1);//80% chance to force a different one
-					if (Math.random()<0.0001) list.push('blab');
+					if (Math.random()<0.5) list.push('blab');
+					list.push('blab');
 					var choice=choose(list);
 					
 					if (this.chain>0) choice='chain cookie';
@@ -5557,6 +5559,10 @@ Game.Launch=function()
 					else if (choice=='dragon harvest')
 					{
 						buff=Game.gainBuff('dragon harvest',Math.ceil(60*effectDurMod),15);
+					}
+					else if (choice=='dragon essence')
+					{
+						buff=Game.gainBuff('dragon essence',Math.ceil(13*effectDurMod),25);
 					}
 					else if (choice=='everything must go')
 					{
@@ -5890,6 +5896,7 @@ Game.Launch=function()
 			"Building special","building special",
 			"Dragon Harvest","dragon harvest",
 			"Dragonflight","dragonflight",
+			"Dragon Essence","dragon essence",
 			"Sweet","free sugar lump",
 			"Blab","blab"
 		];
@@ -13066,6 +13073,20 @@ Game.Launch=function()
 				aura:1
 			};
 		});
+		new Game.buffType('dragon essence',function(time,pow)
+		{
+			if (Game.Has('Dragon fang')) pow=Math.ceil(pow*1.1);
+			return {
+				name:'Dragon Essence',
+				desc:loc("Cookie production and clicking power x%1 for %2!",[pow,Game.sayTime(time*Game.fps,-1)]),
+				icon:[10,25],
+				time:time*Game.fps,
+				add:true,
+				multCpS:pow,
+				multClick:pow,
+				aura:1
+			};
+		});
 		new Game.buffType('everything must go',function(time,pow)
 		{
 			return {
@@ -14457,7 +14478,7 @@ Game.Launch=function()
 				Timer.clean();
 				
 				var showDragon=0;
-				if (Game.hasBuff('Dragonflight') || Game.hasBuff('Dragon Harvest')) showDragon=1;
+				if (Game.hasBuff('Dragonflight') || Game.hasBuff('Dragon Harvest') || Game.hasBuff('Dragon Essence') ) showDragon=1;
 				
 				Game.cookieOriginX=Math.floor(ctx.canvas.width/2);
 				Game.cookieOriginY=Math.floor(ctx.canvas.height*0.4);
