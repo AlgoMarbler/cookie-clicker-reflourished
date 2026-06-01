@@ -5588,7 +5588,7 @@ Game.Launch=function()
 					}
 					else if (choice=='click frenzy')
 					{
-						buff=Game.gainBuff('click frenzy',Math.ceil(50*effectDurMod),67);
+						buff=Game.gainBuff('click frenzy',Math.ceil(13*effectDurMod),777);
 					}
 					else if (choice=='dragonflight')
 					{
