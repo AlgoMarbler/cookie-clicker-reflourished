@@ -36,28 +36,26 @@ M.launch=function()
 			},
 			'hand of fate':{
 				name:'Force the Hand of Fate',
-				desc:'Summon a random golden cookie. Each existing golden cookie makes this spell +10% more likely to backfire.',
+				desc:'Summon a random golden cookie. Each existing golden cookie makes this spell +15% more likely to backfire.',
 				failDesc:'Summon an unlucky wrath cookie.',
 				icon:[22,11],
 				costMin:10,
 				costPercent:0.4,
 				failFunc:function(fail)
 				{
-					return fail+0.1*Game.shimmerTypes['golden'].n;
+					return fail+0.15*Game.shimmerTypes['golden'].n;
 				},
 				win:function()
 				{
 					var newShimmer=new Game.shimmer('golden',{noWrath:true});
 					var choices=[];
-					choices.push('frenzy','multiply cookies');
-					if (Math.random()<0.5) choices.push('long frenzy', 'supercharge');
+					choices.push('frenzy','multiply cookies', 'supercharge', 'endurance frenzy', 'dragon essence');
 					if (!Game.hasBuff('Dragonflight')) choices.push('click frenzy');
 					if (Math.random()<0.1) choices.push('cookie storm','cookie storm','blab');
 					if (Game.BuildingsOwned>=10 && Math.random()<0.25) choices.push('building special');
 					//if (Math.random()<0.2) choices.push('clot','cursed finger','ruin cookies');
 					if (Math.random()<0.15) choices=['cookie storm drop'];
-					if (Math.random()<0.05) choices.push('free sugar lump');
-					if (Math.random()<0.4) list.push('dragon essence');
+					if (Math.random()<0.2) choices.push('free sugar lump');
 					newShimmer.force=choose(choices);
 					if (newShimmer.force=='cookie storm drop')
 					{
@@ -71,10 +69,8 @@ M.launch=function()
 					var choices=[];
 					choices.push('clot','ruin cookies');
 					if (Math.random()<0.1) choices.push('cursed finger','blood frenzy');
-					if (Math.random()<0.25) choices.push('long frenzy', 'supercharge');
-					if (Math.random()<0.13) choices.push('free sugar lump');
+					if (Math.random()<0.003) choices.push('free sugar lump');
 					if (Math.random()<0.1) choices=['blab'];
-					if (Math.random()<0.2) list.push('dragon essence');
 					newShimmer.force=choose(choices);
 					Game.Popup('<div style="font-size:80%;">Backfire!<br>Sinister fate!</div>',Game.mouseX,Game.mouseY);
 				},
