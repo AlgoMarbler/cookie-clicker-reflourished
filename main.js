@@ -14827,7 +14827,7 @@ Game.Launch=function()
 						a*=1-Math.pow(1-(Game.ReincarnateTimer/Game.ReincarnateDuration),2)*2;
 					}
 					
-					if (Game.TOYS)
+					if (1)
 					{
 						//golly
 						if (!Game.Toy)
