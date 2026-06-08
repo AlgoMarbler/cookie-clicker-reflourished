@@ -3264,7 +3264,9 @@ Game.Launch=function()
 						
 						var timeOffline=(Date.now()-Game.lastDate)/1000;
 						
-						if (Math.random()<1/10000) Game.TOYS=1;//teehee!
+						Game.TOYS=1;//teehee!
+						Game.toysType = 2;
+						
 						if (Math.random()<1/10000) Game.WINKLERS=1;//squeak
 						
 						//compute cookies earned while the game was closed
