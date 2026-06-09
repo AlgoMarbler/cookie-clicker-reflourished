@@ -5604,12 +5604,12 @@ Game.Launch=function()
 						var digit=me.wrath?6:7;
 						if (this.chain==1) this.chain+=Math.max(0,Math.ceil(Math.log(Game.cookies)/Math.LN10)-10);
 						
-						var maxPayout=Math.min(Game.cookiesPs*60*60*6,Game.cookies*0.5)*mult;
+						var maxPayout=Math.min(Game.cookiesPs*60*60,Game.cookies*100)*mult;
 						var moni=Math.max(digit,Math.min(Math.floor(1/9*Math.pow(10,this.chain)*digit*mult),maxPayout));
 						var nextMoni=Math.max(digit,Math.min(Math.floor(1/9*Math.pow(10,this.chain+1)*digit*mult),maxPayout));
 						this.totalFromChain+=moni;
 
-						//break the chain if we're above 5 digits AND it's more than 50% of our bank, it grants more than 6 hours of our CpS, or just a 1% chance each digit (update : removed digit limit)
+						//break the chain if we're above 5 digits AND it's more than 100x of our bank, it grants more than an hour of our CpS, or just a 1% chance each digit (update : removed digit limit)
 						if (nextMoni>=maxPayout)
 						{
 							this.chain=0;
