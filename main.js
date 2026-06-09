@@ -5442,8 +5442,8 @@ Game.Launch=function()
 					else list.push('frenzy','multiply cookies');
 					if (me.wrath>0 && Game.hasGod && Game.hasGod('scorn')) list.push('clot','ruin cookies','clot','ruin cookies');
 					if (me.wrath>0 && Math.random()<0.1) list.push('blood frenzy','chain cookie','cookie storm');
-					else if (Math.random()<0.03 && Game.cookiesEarned>=100000) list.push('chain cookie','cookie storm');
-					if (Math.random()<0.05 && Game.season=='fools') list.push('everything must go');
+					else if (Math.random()<0.15 && Game.cookiesEarned>=100000) list.push('chain cookie','cookie storm');
+					if (Math.random()<0.05) list.push('everything must go');
 					if (Math.random()<0.15) list.push('click frenzy');
 					if (Math.random()<0.5) list.push('long frenzy');
 					if (Math.random()<0.15) list.push('supercharge');
@@ -5560,7 +5560,7 @@ Game.Launch=function()
 					}
 					else if (choice=='everything must go')
 					{
-						buff=Game.gainBuff('everything must go',Math.ceil(8*effectDurMod),5);
+						buff=Game.gainBuff('everything must go',Math.ceil(8*effectDurMod),50);
 					}
 					else if (choice=='multiply cookies')
 					{
@@ -8502,7 +8502,7 @@ Game.Launch=function()
 			if (Game.Has('Fortune #100')) price*=0.99;
 			//if (Game.hasAura('Fierce Hoarder')) price*=0.98;
 			price*=1-Game.auraMult('Fierce Hoarder')*0.02;
-			if (Game.hasBuff('Everything must go')) price*=0.95;
+			if (Game.hasBuff('Everything must go')) price*=0.5;
 			if (Game.hasBuff('Crafty pixies')) price*=0.98;
 			if (Game.hasBuff('Nasty goblins')) price*=1.02;
 			if (building.fortune && Game.Has(building.fortune.name)) price*=0.93;
