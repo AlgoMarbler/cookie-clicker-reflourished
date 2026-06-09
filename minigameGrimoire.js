@@ -12,14 +12,14 @@ M.launch=function()
 		M.spells={
 			'conjure baked goods':{
 				name:'Conjure Baked Goods',
-				desc:'Summon 10 minutes worth of your CpS, capped at 50% of your cookies owned.',
+				desc:'Summon 10 minutes worth of your CpS, capped at twice your cookies owned.',
 				failDesc:'Trigger a 10-minute clot and lose 10 minutes of CpS.',
 				icon:[21,11],
 				costMin:3,
 				costPercent:0.2,
 				win:function()
 				{
-					var val=Math.max(7,Math.min(Game.cookies*0.5,Game.cookiesPs*60*10));
+					var val=Math.max(7,Math.min(Game.cookies*2.0,Game.cookiesPs*60*10));
 					Game.Earn(val);
 					Game.Notify('Conjure baked goods!','You magic <b>'+Beautify(val)+' cookie'+(val==1?'':'s')+'</b> out of thin air.',[21,11],6);
 					Game.Popup('<div style="font-size:80%;">+'+Beautify(val)+' cookie'+(val==1?'':'s')+'!</div>',Game.mouseX,Game.mouseY);
@@ -36,7 +36,7 @@ M.launch=function()
 			},
 			'hand of fate':{
 				name:'Force the Hand of Fate',
-				desc:'Summon a random golden cookie. Each existing golden cookie makes this spell +15% more likely to backfire.',
+				desc:'Summon a random non-blab golden cookie. Each existing golden cookie makes this spell +15% more likely to backfire.',
 				failDesc:'Summon an unlucky wrath cookie.',
 				icon:[22,11],
 				costMin:10,
@@ -50,8 +50,8 @@ M.launch=function()
 					var newShimmer=new Game.shimmer('golden',{noWrath:true});
 					var choices=[];
 					choices.push('frenzy','multiply cookies', 'supercharge', 'endurance frenzy', 'dragon essence');
-					if (!Game.hasBuff('Dragonflight')) choices.push('click frenzy');
-					if (Math.random()<0.1) choices.push('cookie storm','cookie storm','blab');
+					choices.push('click frenzy');
+					if (Math.random()<0.25) choices.push('cookie storm','cookie storm');
 					if (Game.BuildingsOwned>=10 && Math.random()<0.25) choices.push('building special');
 					//if (Math.random()<0.2) choices.push('clot','cursed finger','ruin cookies');
 					if (Math.random()<0.15) choices=['cookie storm drop'];
