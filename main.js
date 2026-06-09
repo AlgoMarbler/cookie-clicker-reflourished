@@ -5452,7 +5452,7 @@ Game.Launch=function()
 					
 					if (Game.BuildingsOwned>=10 && Math.random()<0.25) list.push('building special');
 				
-					if (Game.canLumps() && Math.random()<0.0005) list.push('free sugar lump');
+					if (Game.canLumps() && Math.random()<0.05) list.push('free sugar lump');
 					
 					if ((me.wrath==0 && Math.random()<0.15) || Math.random()<0.05)
 					{
@@ -5463,7 +5463,7 @@ Game.Launch=function()
 					}
 					
 					if (this.last!='' && Math.random()<0.8 && list.indexOf(this.last)!=-1) list.splice(list.indexOf(this.last),1);//80% chance to force a different one
-					if (Math.random()<0.5) list.push('blab');
+					if (Math.random()<0.25) list.push('blab');
 					list.push('blab');
 					var choice=choose(list);
 					
