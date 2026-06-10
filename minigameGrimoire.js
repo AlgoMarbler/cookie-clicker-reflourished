@@ -156,13 +156,13 @@ M.launch=function()
 				win:function()
 				{
 					Game.killBuff('Haggler\'s misery');
-					var buff=Game.gainBuff('haggler luck',60,2);
+					var buff=Game.gainBuff('haggler luck',60,25);
 					Game.Popup('<div style="font-size:80%;">Upgrades are cheaper!</div>',Game.mouseX,Game.mouseY);
 				},
 				fail:function()
 				{
 					Game.killBuff('Haggler\'s luck');
-					var buff=Game.gainBuff('haggler misery',60*60,2);
+					var buff=Game.gainBuff('haggler misery',60*60,50);
 					Game.Popup('<div style="font-size:80%;">Backfire!<br>Upgrades are pricier!</div>',Game.mouseX,Game.mouseY);
 				},
 			},
@@ -176,13 +176,13 @@ M.launch=function()
 				win:function()
 				{
 					Game.killBuff('Nasty goblins');
-					var buff=Game.gainBuff('pixie luck',60,2);
+					var buff=Game.gainBuff('pixie luck',60,25);
 					Game.Popup('<div style="font-size:80%;">Crafty pixies!<br>Buildings are cheaper!</div>',Game.mouseX,Game.mouseY);
 				},
 				fail:function()
 				{
 					Game.killBuff('Crafty pixies');
-					var buff=Game.gainBuff('pixie misery',60*60,2);
+					var buff=Game.gainBuff('pixie misery',60*60,50);
 					Game.Popup('<div style="font-size:80%;">Backfire!<br>Nasty goblins!<br>Buildings are pricier!</div>',Game.mouseX,Game.mouseY);
 				},
 			},
