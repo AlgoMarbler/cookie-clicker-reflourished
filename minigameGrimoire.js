@@ -13,7 +13,7 @@ M.launch=function()
 			'conjure baked goods':{
 				name:'Conjure Baked Goods',
 				desc:'Summon 10 minutes worth of your CpS, capped at twice your cookies owned.',
-				failDesc:'Trigger a 10-minute clot and lose 10 minutes of CpS.',
+				failDesc:'Trigger a 15-minute clot and lose 15 minutes of CpS.',
 				icon:[21,11],
 				costMin:20,
 				costPercent:0.2,
