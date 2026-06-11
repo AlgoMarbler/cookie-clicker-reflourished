@@ -10366,7 +10366,7 @@ Game.Launch=function()
     
     new Game.Upgrade('Golden switch',loc("Unlocks the <b>golden switch</b>, which passively boosts your CpS by %1% but disables golden cookies.",50)+'<q>Less clicking, more idling.</q>',999,[21,10]);Game.last.pool='prestige';Game.last.parents=['Heavenly luck'];
     
-    new Game.Upgrade('Classic dairy selection',loc("Unlocks the <b>milk selector</b>, letting you pick which milk is displayed under your cookie.<br>Comes with a variety of basic flavors.")+'<q>Don\'t have a cow, man.</q>',9,[1,8]);Game.last.pool='prestige';Game.last.parents=[];
+    new Game.Upgrade('Classic dairy selection',loc("Unlocks the <b>milk selector</b>, letting you pick which milk is displayed under your cookie.<br>Comes with a variety of basic flavors.")+'<q>Don\'t have a cow, man.</q>',0,[1,8]);Game.last.pool='prestige';Game.last.parents=[];
     
     new Game.Upgrade('Fanciful dairy selection',loc("Contains more exotic flavors for your milk selector.")+'<q>Strong bones for the skeleton army.</q>',1000000,[9,7]);Game.last.pool='prestige';Game.last.parents=['Classic dairy selection'];
     
