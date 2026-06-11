@@ -1,4 +1,4 @@
-﻿var M={};
+var M={};
 M.parent=Game.Objects['Farm'];
 M.parent.minigame=M;
 M.launch=function()
@@ -33,13 +33,13 @@ M.launch=function()
 				q:'A plentiful crop whose hardy grain is used to make flour for pastries.',
 				onHarvest:function(x,y,age)
 				{
-					if (age>=this.mature) M.dropUpgrade('Wheat slims',0.1);
+					if (age>=this.mature) M.dropUpgrade('Wheat slims',0.001);
 				},
 			},
 			'thumbcorn':{
 				name:'Thumbcorn',
 				icon:1,
-				cost:2,
+				cost:5,
 				costM:100,
 				ageTick:6,
 				ageTickR:2,
@@ -51,7 +51,7 @@ M.launch=function()
 			'cronerice':{
 				name:'Cronerice',
 				icon:2,
-				cost:5,
+				cost:15,
 				costM:250,
 				ageTick:0.4,
 				ageTickR:0.7,
@@ -63,7 +63,7 @@ M.launch=function()
 			'gildmillet':{
 				name:'Gildmillet',
 				icon:3,
-				cost:5,
+				cost:15,
 				costM:1500,
 				ageTick:2,
 				ageTickR:1.5,
@@ -75,7 +75,7 @@ M.launch=function()
 			'clover':{
 				name:'Ordinary clover',
 				icon:4,
-				cost:7,
+				cost:25,
 				costM:77777,
 				ageTick:1,
 				ageTickR:1.5,
@@ -87,7 +87,7 @@ M.launch=function()
 			'goldenClover':{
 				name:'Golden clover',
 				icon:5,
-				cost:13,
+				cost:125,
 				costM:777777777777,
 				ageTick:4,
 				ageTickR:12,
@@ -99,7 +99,7 @@ M.launch=function()
 			'shimmerlily':{
 				name:'Shimmerlily',
 				icon:6,
-				cost:15,
+				cost:60,
 				costM:777777,
 				ageTick:5,
 				ageTickR:6,
@@ -111,7 +111,7 @@ M.launch=function()
 			'elderwort':{
 				name:'Elderwort',
 				icon:7,
-				cost:30,
+				cost:60*3,
 				costM:100000000,
 				ageTick:0.3,
 				ageTickR:0.5,
@@ -130,19 +130,19 @@ M.launch=function()
 			'bakeberry':{
 				name:'Bakeberry',
 				icon:8,
-				cost:20,
+				cost:45,
 				costM:100000000,
 				ageTick:1,
 				ageTickR:1,
 				mature:50,
 				children:['queenbeet'],
-				effsStr:'<div class="green">&bull; +1% CpS</div><div class="green">&bull; harvest when mature for +30 minutes of CpS (max. 2x of bank)</div>',
+				effsStr:'<div class="green">&bull; +1% CpS</div><div class="green">&bull; harvest when mature for +30 minutes of CpS (max. 3% of bank)</div>',
 				q:'A favorite among cooks, this large berry has a crunchy brown exterior and a creamy red center. Excellent in pies or chicken stews.',
 				onHarvest:function(x,y,age)
 				{
 					if (age>=this.mature)
 					{
-						var moni=Math.min(Game.cookies*2,Game.cookiesPs*60*30);
+						var moni=Math.min(Game.cookies*0.03,Game.cookiesPs*60*30);
 						if (moni!=0)
 						{
 							Game.Earn(moni);
@@ -155,20 +155,20 @@ M.launch=function()
 			'chocoroot':{
 				name:'Chocoroot',
 				icon:9,
-				cost:1,
+				cost:15,
 				costM:100000,
 				ageTick:4,
 				ageTickR:0,
 				mature:25,
 				detailsStr:'Predictable growth',
 				children:['whiteChocoroot','drowsyfern','queenbeet'],
-				effsStr:'<div class="green">&bull; +1% CpS</div><div class="green">&bull; harvest when mature for +3 minutes of CpS (max. 50% of bank)</div><div class="green">&bull; predictable growth</div>',
+				effsStr:'<div class="green">&bull; +1% CpS</div><div class="green">&bull; harvest when mature for +3 minutes of CpS (max. 3% of bank)</div><div class="green">&bull; predictable growth</div>',
 				q:'A tangly bramble coated in a sticky, sweet substance. Unknown genetic ancestry. Children often pick these from fields as-is as a snack.',
 				onHarvest:function(x,y,age)
 				{
 					if (age>=this.mature)
 					{
-						var moni=Math.min(Game.cookies*0.5,Game.cookiesPs*60*3);
+						var moni=Math.min(Game.cookies*0.03,Game.cookiesPs*60*3);
 						if (moni!=0)
 						{
 							Game.Earn(moni);
@@ -180,20 +180,20 @@ M.launch=function()
 			'whiteChocoroot':{
 				name:'White chocoroot',
 				icon:10,
-				cost:3,
+				cost:15,
 				costM:100000,
 				ageTick:4,
 				ageTickR:0,
 				mature:25,
 				detailsStr:'Predictable growth',
 				children:['whiskerbloom','tidygrass'],
-				effsStr:'<div class="green">&bull; +1% golden cookie gains</div><div class="green">&bull; harvest when mature for +3 minutes of CpS (max. 50% of bank)</div><div class="green">&bull; predictable growth</div>',
+				effsStr:'<div class="green">&bull; +1% golden cookie gains</div><div class="green">&bull; harvest when mature for +3 minutes of CpS (max. 3% of bank)</div><div class="green">&bull; predictable growth</div>',
 				q:'A pale, even sweeter variant of the chocoroot. Often impedes travelers with its twisty branches.',
 				onHarvest:function(x,y,age)
 				{
 					if (age>=this.mature)
 					{
-						var moni=Math.min(Game.cookies*0.5, Game.cookiesPs*60*3);
+						var moni=Math.min(Game.cookies*0.03,Game.cookiesPs*60*3);
 						if (moni!=0)
 						{
 							Game.Earn(moni);
@@ -207,7 +207,7 @@ M.launch=function()
 				name:'White mildew',
 				fungus:true,
 				icon:26,
-				cost:2,
+				cost:20,
 				costM:9999,
 				ageTick:8,
 				ageTickR:12,
@@ -221,7 +221,7 @@ M.launch=function()
 				name:'Brown mold',
 				fungus:true,
 				icon:27,
-				cost:2,
+				cost:20,
 				costM:9999,
 				ageTick:8,
 				ageTickR:12,
@@ -255,7 +255,7 @@ M.launch=function()
 			'whiskerbloom':{
 				name:'Whiskerbloom',
 				icon:11,
-				cost:10,
+				cost:20,
 				costM:1000000,
 				ageTick:2,
 				ageTickR:2,
@@ -267,7 +267,7 @@ M.launch=function()
 			'chimerose':{
 				name:'Chimerose',
 				icon:12,
-				cost:10,
+				cost:15,
 				costM:242424,
 				ageTick:1,
 				ageTickR:1.5,
@@ -279,7 +279,7 @@ M.launch=function()
 			'nursetulip':{
 				name:'Nursetulip',
 				icon:13,
-				cost:30,
+				cost:40,
 				costM:1000000000,
 				ageTick:0.5,
 				ageTickR:2,
@@ -291,7 +291,7 @@ M.launch=function()
 			'drowsyfern':{
 				name:'Drowsyfern',
 				icon:14,
-				cost:60,
+				cost:90,
 				costM:100000,
 				ageTick:0.05,
 				ageTickR:0.1,
@@ -307,7 +307,7 @@ M.launch=function()
 			'wardlichen':{
 				name:'Wardlichen',
 				icon:15,
-				cost:5,
+				cost:10,
 				costM:10000,
 				ageTick:5,
 				ageTickR:4,
@@ -319,7 +319,7 @@ M.launch=function()
 			'keenmoss':{
 				name:'Keenmoss',
 				icon:16,
-				cost:13,
+				cost:50,
 				costM:1000000,
 				ageTick:4,
 				ageTickR:5,
@@ -331,20 +331,20 @@ M.launch=function()
 			'queenbeet':{
 				name:'Queenbeet',
 				icon:17,
-				cost:25,
+				cost:60*1.5,
 				costM:1000000000,
 				ageTick:1,
 				ageTickR:0.4,
 				mature:80,
 				noContam:true,
 				children:['duketater','queenbeetLump','shriekbulb'],
-				effsStr:'<div class="green">&bull; +0.3% golden cookie effect duration</div><div class="red">&bull; -2% CpS</div><div class="green">&bull; harvest when mature for +1 hour of CpS (max. 3x of bank)</div>',
+				effsStr:'<div class="green">&bull; +0.3% golden cookie effect duration</div><div class="red">&bull; -2% CpS</div><div class="green">&bull; harvest when mature for +1 hour of CpS (max. 4% of bank)</div>',
 				q:'A delicious taproot used to prepare high-grade white sugar. Entire countries once went to war over these.',
 				onHarvest:function(x,y,age)
 				{
 					if (age>=this.mature)
 					{
-						var moni=Math.min(Game.cookies*3,Game.cookiesPs*60*60);
+						var moni=Math.min(Game.cookies*0.04,Game.cookiesPs*60*60);
 						if (moni!=0)
 						{
 							Game.Earn(moni);
@@ -357,7 +357,7 @@ M.launch=function()
 				name:'Juicy queenbeet',
 				icon:18,
 				plantable:false,
-				cost:180,
+				cost:60*2,
 				costM:1000000000000,
 				ageTick:0.04,
 				ageTickR:0.08,
@@ -378,20 +378,20 @@ M.launch=function()
 			'duketater':{
 				name:'Duketater',
 				icon:19,
-				cost:60*2,
+				cost:60*8,
 				costM:1000000000000,
 				ageTick:0.4,
 				ageTickR:0.1,
 				mature:95,
 				noContam:true,
 				children:['shriekbulb'],
-				effsStr:'<div class="green">&bull; harvest when mature for +2 hours of CpS (max. 5x of bank)</div>',
+				effsStr:'<div class="green">&bull; harvest when mature for +2 hours of CpS (max. 8% of bank)</div>',
 				q:'A rare, rich-tasting tuber fit for a whole meal, as long as its strict harvesting schedule is respected. Its starch has fascinating baking properties.',
 				onHarvest:function(x,y,age)
 				{
 					if (age>=this.mature)
 					{
-						var moni=Math.min(Game.cookies*5,Game.cookiesPs*60*60*2);
+						var moni=Math.min(Game.cookies*0.08,Game.cookiesPs*60*60*2);
 						if (moni!=0)
 						{
 							Game.Earn(moni);
@@ -405,7 +405,7 @@ M.launch=function()
 				name:'Crumbspore',
 				fungus:true,
 				icon:20,
-				cost:3,
+				cost:10,
 				costM:999,
 				ageTick:3,
 				ageTickR:3,
@@ -414,11 +414,11 @@ M.launch=function()
 				noContam:true,
 				detailsStr:'Spreads easily',
 				children:['crumbspore','glovemorel','cheapcap','doughshroom','wrinklegill','ichorpuff'],
-				effsStr:'<div class="green">&bull; explodes into up to 1 minute of CpS at the end of its lifecycle (max. 50% of bank)</div><div class="red">&bull; may overtake nearby plants</div>',
+				effsStr:'<div class="green">&bull; explodes into up to 1 minute of CpS at the end of its lifecycle (max. 1% of bank)</div><div class="red">&bull; may overtake nearby plants</div>',
 				q:'An archaic mold that spreads its spores to the surrounding dirt through simple pod explosion.',
 				onDie:function(x,y)
 				{
-					var moni=Math.min(Game.cookies*0.5,Game.cookiesPs*60)*Math.random();
+					var moni=Math.min(Game.cookies*0.01,Game.cookiesPs*60)*Math.random();
 					if (moni!=0)
 					{
 						Game.Earn(moni);
@@ -430,7 +430,7 @@ M.launch=function()
 				name:'Doughshroom',
 				fungus:true,
 				icon:24,
-				cost:3,
+				cost:100,
 				costM:100000000,
 				ageTick:1,
 				ageTickR:2,
@@ -439,11 +439,11 @@ M.launch=function()
 				noContam:true,
 				detailsStr:'Spreads easily',
 				children:['crumbspore','doughshroom','foolBolete','shriekbulb'],
-				effsStr:'<div class="green">&bull; explodes into up to 5 minutes of CpS at the end of its lifecycle (max. 75% of bank)</div><div class="red">&bull; may overtake nearby plants</div>',
+				effsStr:'<div class="green">&bull; explodes into up to 5 minutes of CpS at the end of its lifecycle (max. 3% of bank)</div><div class="red">&bull; may overtake nearby plants</div>',
 				q:'Jammed full of warm spores; some forest walkers often describe the smell as similar to passing by a bakery.',
 				onDie:function(x,y)
 				{
-					var moni=Math.min(Game.cookies*0.75,Game.cookiesPs*60*5)*Math.random();
+					var moni=Math.min(Game.cookies*0.03,Game.cookiesPs*60*5)*Math.random();
 					if (moni!=0)
 					{
 						Game.Earn(moni);
@@ -455,7 +455,7 @@ M.launch=function()
 				name:'Glovemorel',
 				fungus:true,
 				icon:21,
-				cost:3,
+				cost:30,
 				costM:10000,
 				ageTick:3,
 				ageTickR:18,
@@ -468,7 +468,7 @@ M.launch=function()
 				name:'Cheapcap',
 				fungus:true,
 				icon:22,
-				cost:2,
+				cost:40,
 				costM:100000,
 				ageTick:6,
 				ageTickR:16,
@@ -481,7 +481,7 @@ M.launch=function()
 				name:'Fool\'s bolete',
 				fungus:true,
 				icon:23,
-				cost:1,
+				cost:15,
 				costM:10000,
 				ageTick:5,
 				ageTickR:25,
@@ -494,7 +494,7 @@ M.launch=function()
 				name:'Wrinklegill',
 				fungus:true,
 				icon:25,
-				cost:3,
+				cost:20,
 				costM:1000000,
 				ageTick:1,
 				ageTickR:3,
@@ -507,7 +507,7 @@ M.launch=function()
 				name:'Green rot',
 				fungus:true,
 				icon:28,
-				cost:2,
+				cost:60,
 				costM:1000000,
 				ageTick:12,
 				ageTickR:13,
@@ -523,7 +523,7 @@ M.launch=function()
 			'shriekbulb':{
 				name:'Shriekbulb',
 				icon:30,
-				cost:10,
+				cost:60,
 				costM:4444444444444,
 				ageTick:3,
 				ageTickR:1,
@@ -537,7 +537,7 @@ M.launch=function()
 			'tidygrass':{
 				name:'Tidygrass',
 				icon:31,
-				cost:30,
+				cost:90,
 				costM:100000000000000,
 				ageTick:0.5,
 				ageTickR:0,
