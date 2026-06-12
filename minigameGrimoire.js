@@ -422,15 +422,14 @@ M.launch=function()
 		}
 		
 		M.refillTooltip=function(){
-			return '<div style="padding:8px;width:300px;font-size:11px;text-align:center;">Click to refill <b>100 units</b> of your magic meter for <span class="price lump">1 sugar lump</span>.'+
+			return '<div style="padding:8px;width:300px;font-size:11px;text-align:center;">Click to refill your magic meter for <span class="price lump">1 sugar lump</span>.'+
 				(Game.canRefillLump()?'<br><small>(can be done once every '+Game.sayTime(Game.getLumpRefillMax(),-1)+')</small>':('<br><small class="red">(usable again in '+Game.sayTime(Game.getLumpRefillRemaining()+Game.fps,-1)+')</small>'))+
 			'</div>';
 		};
 		AddEvent(M.lumpRefill,'click',function(){
 			if (M.magic<M.magicM)
 			{Game.refillLump(1,function(){
-				M.magic+=100;
-				M.magic=Math.min(M.magic,M.magicM);
+				M.magic=M.magicM;
 				PlaySound('snd/pop'+Math.floor(Math.random()*3+1)+'.mp3',0.75);
 			});}
 		});
