@@ -264,7 +264,7 @@ M.launch=function()
 		{
 			var towers= Math.min(Math.max(M.parent.amount,1) * 4, Math.max(M.parent.amount,1) * 3 + 40);
 			var lvl=Math.max(M.parent.level,1);
-			M.magicM=Math.floor(4+Math.pow(towers,0.6)+Math.log((towers+(lvl-1)*10)/15+1)*15);
+			M.magicM=Math.floor(4+Math.pow(towers,0.6)+Math.log((towers+(lvl-1)*50)/15+1)*15);
 			//old formula :
 			/*
 			M.magicM=8+Math.min(M.parent.amount,M.parent.level*5)+Math.ceil(M.parent.amount/10);
