@@ -4543,16 +4543,17 @@ Game.Launch=function()
     Game.computeLumpType=function()
     {
       Math.seedrandom(Game.seed+'/'+Game.lumpT);
-      var types=[0];
+      var types=[];
       var loop=1;
       //if (Game.hasAura('Dragon\'s Curve')) loop=2;
       loop+=Game.auraMult('Dragon\'s Curve');
       loop=randomFloor(loop);
       for (var i=0;i<loop;i++)
       {
+        if (Game.elderWrath == 0) types.push(0);
         if (Math.random()<(Game.Has('Sucralosia Inutilis')?0.75:0.5)) types.push(1);//bifurcated
         if (Math.random()<0.1) types.push(2);//golden
-        if (Math.random()<0.3*Game.elderWrath) types.push(3);//meaty
+        if (Math.random()<0.5*Game.elderWrath) types.push(3);//meaty
         if (Math.random()<0.25) types.push(4);//caramelized
       }
       Game.lumpCurrentType=choose(types);
