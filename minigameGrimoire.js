@@ -476,7 +476,7 @@ M.launch=function()
 	{
 		//run each frame
 		if (Game.T%5==0) {M.computeMagicM();}
-		M.magicPS=Math.max(0.002,Math.pow(M.magic/Math.max(M.magicM,100),0.5))*(0.001+0.001*M.parent.level);
+		M.magicPS=Math.max(0.002,Math.pow(M.magic/Math.max(M.magicM,100),0.5))*(0.0005+0.0015*M.parent.level);
 		M.magic+=M.magicPS;
 		M.magic=Math.min(M.magic,M.magicM);
 		if (Game.T%5==0)
