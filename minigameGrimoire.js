@@ -237,7 +237,7 @@ M.launch=function()
 			},
 			'diminish ineptitude':{
 				name:'Diminish Ineptitude',
-				desc:'Spells do not for the next 5 minutes.',
+				desc:'Spells do not backfire for the next 5 minutes.',
 				failDesc:'Spells always backfire for the next 10 minutes.',
 				icon:[29,11],
 				costMin:10,
