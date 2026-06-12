@@ -136,13 +136,13 @@ M.launch=function()
 				ageTickR:1,
 				mature:50,
 				children:['queenbeet'],
-				effsStr:'<div class="green">&bull; +1% CpS</div><div class="green">&bull; harvest when mature for +30 minutes of CpS (max. 3% of bank)</div>',
+				effsStr:'<div class="green">&bull; +1% CpS</div><div class="green">&bull; harvest when mature for +30 minutes of CpS (max. 2x of bank)</div>',
 				q:'A favorite among cooks, this large berry has a crunchy brown exterior and a creamy red center. Excellent in pies or chicken stews.',
 				onHarvest:function(x,y,age)
 				{
 					if (age>=this.mature)
 					{
-						var moni=Math.min(Game.cookies*0.03,Game.cookiesPs*60*30);
+						var moni=Math.min(Game.cookies*2,Game.cookiesPs*60*30);
 						if (moni!=0)
 						{
 							Game.Earn(moni);
@@ -162,13 +162,13 @@ M.launch=function()
 				mature:25,
 				detailsStr:'Predictable growth',
 				children:['whiteChocoroot','drowsyfern','queenbeet'],
-				effsStr:'<div class="green">&bull; +1% CpS</div><div class="green">&bull; harvest when mature for +3 minutes of CpS (max. 3% of bank)</div><div class="green">&bull; predictable growth</div>',
+				effsStr:'<div class="green">&bull; +1% CpS</div><div class="green">&bull; harvest when mature for +3 minutes of CpS (max. 50% of bank)</div><div class="green">&bull; predictable growth</div>',
 				q:'A tangly bramble coated in a sticky, sweet substance. Unknown genetic ancestry. Children often pick these from fields as-is as a snack.',
 				onHarvest:function(x,y,age)
 				{
 					if (age>=this.mature)
 					{
-						var moni=Math.min(Game.cookies*0.03,Game.cookiesPs*60*3);
+						var moni=Math.min(Game.cookies*0.50,Game.cookiesPs*60*3);
 						if (moni!=0)
 						{
 							Game.Earn(moni);
@@ -187,13 +187,13 @@ M.launch=function()
 				mature:25,
 				detailsStr:'Predictable growth',
 				children:['whiskerbloom','tidygrass'],
-				effsStr:'<div class="green">&bull; +1% golden cookie gains</div><div class="green">&bull; harvest when mature for +3 minutes of CpS (max. 3% of bank)</div><div class="green">&bull; predictable growth</div>',
+				effsStr:'<div class="green">&bull; +1% golden cookie gains</div><div class="green">&bull; harvest when mature for +3 minutes of CpS (max. 50% of bank)</div><div class="green">&bull; predictable growth</div>',
 				q:'A pale, even sweeter variant of the chocoroot. Often impedes travelers with its twisty branches.',
 				onHarvest:function(x,y,age)
 				{
 					if (age>=this.mature)
 					{
-						var moni=Math.min(Game.cookies*0.03,Game.cookiesPs*60*3);
+						var moni=Math.min(Game.cookies*0.50,Game.cookiesPs*60*3);
 						if (moni!=0)
 						{
 							Game.Earn(moni);
@@ -338,13 +338,13 @@ M.launch=function()
 				mature:80,
 				noContam:true,
 				children:['duketater','queenbeetLump','shriekbulb'],
-				effsStr:'<div class="green">&bull; +0.3% golden cookie effect duration</div><div class="red">&bull; -2% CpS</div><div class="green">&bull; harvest when mature for +1 hour of CpS (max. 4% of bank)</div>',
+				effsStr:'<div class="green">&bull; +0.3% golden cookie effect duration</div><div class="red">&bull; -2% CpS</div><div class="green">&bull; harvest when mature for +1 hour of CpS (max. 3x of bank)</div>',
 				q:'A delicious taproot used to prepare high-grade white sugar. Entire countries once went to war over these.',
 				onHarvest:function(x,y,age)
 				{
 					if (age>=this.mature)
 					{
-						var moni=Math.min(Game.cookies*0.04,Game.cookiesPs*60*60);
+						var moni=Math.min(Game.cookies*3.0,Game.cookiesPs*60*60);
 						if (moni!=0)
 						{
 							Game.Earn(moni);
@@ -364,7 +364,7 @@ M.launch=function()
 				mature:85,
 				noContam:true,
 				children:[],
-				effsStr:'<div class="red">&bull; -10% CpS</div><div class="red">&bull; surrounding plants (3x3) are 20% less efficient</div><div class="green">&bull; harvest when mature for a sugar lump</div>',
+				effsStr:'<div class="red">&bull; -10% CpS</div><div class="red">&bull; surrounding plants (3x3) are 20% less efficient</div><div class="green">&bull; harvest when mature for a random chance of 1-3 sugar lump</div>',
 				q:'A delicious taproot used to prepare high-grade white sugar. Entire countries once went to war over these.<br>It looks like this one has grown especially sweeter and juicier from growing in close proximity to other queenbeets.',
 				onHarvest:function(x,y,age)
 				{
@@ -385,13 +385,13 @@ M.launch=function()
 				mature:95,
 				noContam:true,
 				children:['shriekbulb'],
-				effsStr:'<div class="green">&bull; harvest when mature for +2 hours of CpS (max. 8% of bank)</div>',
+				effsStr:'<div class="green">&bull; harvest when mature for +2 hours of CpS (max. 4x of bank)</div>',
 				q:'A rare, rich-tasting tuber fit for a whole meal, as long as its strict harvesting schedule is respected. Its starch has fascinating baking properties.',
 				onHarvest:function(x,y,age)
 				{
 					if (age>=this.mature)
 					{
-						var moni=Math.min(Game.cookies*0.08,Game.cookiesPs*60*60*2);
+						var moni=Math.min(Game.cookies*4.0,Game.cookiesPs*60*60*2);
 						if (moni!=0)
 						{
 							Game.Earn(moni);
@@ -414,11 +414,11 @@ M.launch=function()
 				noContam:true,
 				detailsStr:'Spreads easily',
 				children:['crumbspore','glovemorel','cheapcap','doughshroom','wrinklegill','ichorpuff'],
-				effsStr:'<div class="green">&bull; explodes into up to 1 minute of CpS at the end of its lifecycle (max. 1% of bank)</div><div class="red">&bull; may overtake nearby plants</div>',
+				effsStr:'<div class="green">&bull; explodes into up to 1 minute of CpS at the end of its lifecycle (max. 25% of bank)</div><div class="red">&bull; may overtake nearby plants</div>',
 				q:'An archaic mold that spreads its spores to the surrounding dirt through simple pod explosion.',
 				onDie:function(x,y)
 				{
-					var moni=Math.min(Game.cookies*0.01,Game.cookiesPs*60)*Math.random();
+					var moni=Math.min(Game.cookies*0.25,Game.cookiesPs*60)*Math.random();
 					if (moni!=0)
 					{
 						Game.Earn(moni);
@@ -439,11 +439,11 @@ M.launch=function()
 				noContam:true,
 				detailsStr:'Spreads easily',
 				children:['crumbspore','doughshroom','foolBolete','shriekbulb'],
-				effsStr:'<div class="green">&bull; explodes into up to 5 minutes of CpS at the end of its lifecycle (max. 3% of bank)</div><div class="red">&bull; may overtake nearby plants</div>',
+				effsStr:'<div class="green">&bull; explodes into up to 5 minutes of CpS at the end of its lifecycle (max. 50% of bank)</div><div class="red">&bull; may overtake nearby plants</div>',
 				q:'Jammed full of warm spores; some forest walkers often describe the smell as similar to passing by a bakery.',
 				onDie:function(x,y)
 				{
-					var moni=Math.min(Game.cookies*0.03,Game.cookiesPs*60*5)*Math.random();
+					var moni=Math.min(Game.cookies*0.50,Game.cookiesPs*60*5)*Math.random();
 					if (moni!=0)
 					{
 						Game.Earn(moni);
