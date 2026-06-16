@@ -8025,10 +8025,17 @@ Game.Launch=function()
 				//this.basePrice=(this.n*2.5+7.5)*Math.pow(10,this.n);
 				var digits=Math.pow(10,(Math.ceil(Math.log(Math.ceil(this.basePrice))/Math.LN10)))/100;
 				this.basePrice=Math.round(this.basePrice/digits)*digits;
-				if (this.id>=16) this.basePrice*=10;
+				if (this.id>=3) this.basePrice*=0.75;
+				if (this.id>=8) this.basePrice*=1.15;
+				if (this.id>=10) this.basePrice*=1.15;
+				if (this.id>=12) this.basePrice*=1.25;
+				if (this.id>=13) this.basePrice*=1.25;
+				if (this.id>=14) this.basePrice*=1.25;
+				if (this.id>=15) this.basePrice*=1.25;
+				if (this.id>=16) this.basePrice*=5;
 				if (this.id>=17) this.basePrice*=15;
 				if (this.id>=18) this.basePrice*=50;
-				if (this.id>=19) this.basePrice*=200;
+				if (this.id>=19) this.basePrice*=2000;
 				this.price=this.basePrice;
 				this.bulkPrice=this.price;
 			}
