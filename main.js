@@ -9268,7 +9268,7 @@ Game.Launch=function()
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
-			return me.baseCps*mult;
+			return me.baseCps*mult*2;
 		},function(){
 			Game.UnlockTiered(this);
 			if (this.amount>=Game.SpecialGrandmaUnlock && Game.Objects['Grandma'].amount>0) Game.Unlock(this.grandma.name);
@@ -9279,7 +9279,7 @@ Game.Launch=function()
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
-			return me.baseCps*mult;
+			return me.baseCps*mult*2;
 		},function(){
 			Game.UnlockTiered(this);
 			if (this.amount>=Game.SpecialGrandmaUnlock && Game.Objects['Grandma'].amount>0) Game.Unlock(this.grandma.name);
@@ -9289,7 +9289,7 @@ Game.Launch=function()
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
-			return me.baseCps*mult;
+			return me.baseCps*mult*2;
 		},function(){
 			Game.UnlockTiered(this);
 			if (this.amount>=Game.SpecialGrandmaUnlock && Game.Objects['Grandma'].amount>0) Game.Unlock(this.grandma.name);
@@ -9299,7 +9299,7 @@ Game.Launch=function()
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
-			return me.baseCps*mult;
+			return me.baseCps*mult*500;
 		},function(){
 			Game.UnlockTiered(this);
 			if (this.amount>=Game.SpecialGrandmaUnlock && Game.Objects['Grandma'].amount>0) Game.Unlock(this.grandma.name);
