@@ -1,4 +1,4 @@
-﻿/*
+/*
 All this code is copyright Orteil, 2013-2026.
 	-with some help, advice and fixes by Nicholas Laux, Debugbro, Opti, the folks at Playsaurus, and lots of people on reddit, Discord, and the DashNet forums
 	-also includes a bunch of snippets found on stackoverflow.com and others
@@ -4185,12 +4185,12 @@ Game.Launch=function()
 		Game.HCfactor=3;
 		Game.HowMuchPrestige=function(cookies)//how much prestige [cookies] should land you
 		{
-			return Math.pow(cookies/1000000000000,1/Game.HCfactor);
+			return Math.pow(cookies/10000000000,1/Game.HCfactor);
 		}
 		Game.HowManyCookiesReset=function(chips)//how many cookies [chips] are worth
 		{
 			//this must be the inverse of the above function (ie. if cookies=chips^2, chips=cookies^(1/2) )
-			return Math.pow(chips,Game.HCfactor)*1000000000000;
+			return Math.pow(chips,Game.HCfactor)*10000000000;
 		}
 		Game.gainedPrestige=0;
 		Game.EarnHeavenlyChips=function(cookiesForfeited,silent)
@@ -8021,14 +8021,14 @@ Game.Launch=function()
 				var digits=Math.pow(10,(Math.ceil(Math.log(Math.ceil(this.baseCps))/Math.LN10)))/100;
 				this.baseCps=Math.round(this.baseCps/digits)*digits;
 				
-				this.basePrice=(this.n*1+9+(this.n<5?0:Math.pow(this.n-5,1.75)*5))*Math.pow(10,this.n)*(Math.max(1,this.n-14));
+				this.basePrice=parseFloat((((this.n*1+9+(this.n<5?0:Math.pow(this.n-5,1.75)*5))*Math.pow(10,this.n)*(Math.max(1,this.n-14)))*1.35).toPrecision(3));
 				//this.basePrice=(this.n*2.5+7.5)*Math.pow(10,this.n);
 				var digits=Math.pow(10,(Math.ceil(Math.log(Math.ceil(this.basePrice))/Math.LN10)))/100;
 				this.basePrice=Math.round(this.basePrice/digits)*digits;
 				if (this.id>=16) this.basePrice*=10;
-				if (this.id>=17) this.basePrice*=10;
-				if (this.id>=18) this.basePrice*=10;
-				if (this.id>=19) this.basePrice*=20;
+				if (this.id>=17) this.basePrice*=15;
+				if (this.id>=18) this.basePrice*=50;
+				if (this.id>=19) this.basePrice*=200;
 				this.price=this.basePrice;
 				this.bulkPrice=this.price;
 			}
@@ -10287,19 +10287,19 @@ Game.Launch=function()
 		new Game.Upgrade('Kitten workers',strKittenDesc+'<q>meow meow meow meow</q>',9000000000,Game.GetIcon('Kitten',2));Game.last.kitten=1;Game.MakeTiered(Game.last,2,18);
 		
 		order=10000;
-		Game.NewUpgradeCookie({name:'Plain cookies',desc:'We all gotta start somewhere.',icon:[2,3],power:										1,	price:	999999});
-		Game.NewUpgradeCookie({name:'Sugar cookies',desc:'Tasty, if a little unimaginative.',icon:[7,3],power:									1,	price:	999999*5});
-		Game.NewUpgradeCookie({name:'Oatmeal raisin cookies',desc:'No raisin to hate these.',icon:[0,3],power:									1,	price:	9999999});
-		Game.NewUpgradeCookie({name:'Peanut butter cookies',desc:'Get yourself some jam cookies!',icon:[1,3],power:								2,	price:	9999999*5});
-		Game.NewUpgradeCookie({name:'Coconut cookies',desc:'Flaky, but not unreliable. Some people go crazy for these.',icon:[3,3],power:		2,	price:	99999999});
+		Game.NewUpgradeCookie({name:'Plain cookies',desc:'We all gotta start somewhere.',icon:[2,3],power:										1,	price:	99});
+		Game.NewUpgradeCookie({name:'Sugar cookies',desc:'Tasty, if a little unimaginative.',icon:[7,3],power:									1,	price:	99*5});
+		Game.NewUpgradeCookie({name:'Oatmeal raisin cookies',desc:'No raisin to hate these.',icon:[0,3],power:									1,	price:	9999});
+		Game.NewUpgradeCookie({name:'Peanut butter cookies',desc:'Get yourself some jam cookies!',icon:[1,3],power:								2,	price:	9999*5});
+		Game.NewUpgradeCookie({name:'Coconut cookies',desc:'Flaky, but not unreliable. Some people go crazy for these.',icon:[3,3],power:		2,	price:	999999});
 		order=10001;
 		Game.NewUpgradeCookie({name:'White chocolate cookies',desc:'I know what you\'ll say. It\'s just cocoa butter! It\'s not real chocolate!<br>Oh please.',icon:[4,3],power:2,	price:	99999999*5});
 		order=10000;
-		Game.NewUpgradeCookie({name:'Macadamia nut cookies',desc:'They\'re macadamn delicious!',icon:[5,3],power:								2,	price:	99999999});
+		Game.NewUpgradeCookie({name:'Macadamia nut cookies',desc:'They\'re macadamn delicious!',icon:[5,3],power:								2,	price:	999999});
 		order=10002;
-		Game.NewUpgradeCookie({name:'Double-chip cookies',desc:'DOUBLE THE CHIPS<br>DOUBLE THE TASTY<br>(double the calories)',icon:[6,3],power:2,	price:	999999999*5});
-		Game.NewUpgradeCookie({name:'White chocolate macadamia nut cookies',desc:'Orteil\'s favorite.',icon:[8,3],power:						2,	price:	9999999999});
-		Game.NewUpgradeCookie({name:'All-chocolate cookies',desc:'CHOCOVERDOSE.',icon:[9,3],power:												2,	price:	9999999999*5});
+		Game.NewUpgradeCookie({name:'Double-chip cookies',desc:'DOUBLE THE CHIPS<br>DOUBLE THE TASTY<br>(double the calories)',icon:[6,3],power:2,	price:	9999999*5});
+		Game.NewUpgradeCookie({name:'White chocolate macadamia nut cookies',desc:'Orteil\'s favorite.',icon:[8,3],power:						2,	price:	99999999});
+		Game.NewUpgradeCookie({name:'All-chocolate cookies',desc:'CHOCOVERDOSE.',icon:[9,3],power:												2,	price:	99999999*5});
 		
 		order=100;
 		new Game.Upgrade('Quadrillion fingers',getStrThousandFingersGain(20)+'<q>clickityclickityclickityclickityclick</q>',10000000000,[0,17]);Game.MakeTiered(Game.last,8,0);
@@ -15109,21 +15109,21 @@ Game.Launch=function()
 				buy:function(){Game.Spend(1000000);},
 				costStr:function(){return loc("%1 cookie",LBeautify(1000000));}},
 			{name:'Dragon egg',action:loc("Chip it"),pic:1,
-				cost:function(){return Game.cookies>=1000000*2;},
-				buy:function(){Game.Spend(1000000*2);},
-				costStr:function(){return loc("%1 cookie",LBeautify(1000000*2));}},
+				cost:function(){return Game.cookies>=1000000*1000;},
+				buy:function(){Game.Spend(1000000*1000);},
+				costStr:function(){return loc("%1 cookie",LBeautify(1000000*1000));}},
 			{name:'Dragon egg',action:loc("Chip it"),pic:2,
-				cost:function(){return Game.cookies>=1000000*4;},
-				buy:function(){Game.Spend(1000000*4);},
-				costStr:function(){return loc("%1 cookie",LBeautify(1000000*4));}},
+				cost:function(){return Game.cookies>=1000000*1000*1000;},
+				buy:function(){Game.Spend(1000000*1000*1000);},
+				costStr:function(){return loc("%1 cookie",LBeautify(1000000*1000*1000));}},
 			{name:'Shivering dragon egg',action:loc("Hatch it"),pic:3,
-				cost:function(){return Game.cookies>=1000000*8;},
-				buy:function(){Game.Spend(1000000*8);},
-				costStr:function(){return loc("%1 cookie",LBeautify(1000000*8));}},
+				cost:function(){return Game.cookies>=1000000*1000*1000*1000;},
+				buy:function(){Game.Spend(1000000*1000*1000*1000);},
+				costStr:function(){return loc("%1 cookie",LBeautify(1000000*1000*1000*1000));}},
 			{name:'Krumblor, cookie hatchling',action:'Train Breath of Milk<br><small>Aura: kittens are 5% more effective</small>',pic:4,
-				cost:function(){return Game.cookies>=1000000*16;},
-				buy:function(){Game.Spend(1000000*16);},
-				costStr:function(){return loc("%1 cookie",LBeautify(1000000*16));}},
+				cost:function(){return Game.cookies>=1000000*1000*1000*1000*1000;},
+				buy:function(){Game.Spend(1000000*1000*1000*1000*1000);},
+				costStr:function(){return loc("%1 cookie",LBeautify(1000000*1000*1000*1000*1000));}},
 			{name:'Krumblor, cookie hatchling',action:'Train Dragon Cursor<br><small>Aura: clicking is 5% more effective</small>',pic:4,},
 			{name:'Krumblor, cookie hatchling',action:'Train Elder Battalion<br><small>Aura: grandmas gain +1% CpS for every non-grandma building</small>',pic:4,},
 			{name:'Krumblor, cookie hatchling',action:'Train Reaper of Fields<br><small>Aura: golden cookies may trigger a Dragon Harvest</small>',pic:4,},
@@ -15145,13 +15145,13 @@ Game.Launch=function()
 			{name:'Krumblor, cookie dragon',action:'Train Supreme Intellect<br><small>Aura: confers various powers to your minigames</small>',pic:5,},
 			{name:'Krumblor, cookie dragon',action:'Train Dragon Guts<br><small>Aura: enhanced wrinklers</small>',pic:5,},
 			{name:'Krumblor, cookie dragon',action:loc("Bake dragon cookie")+'<br><small>'+loc("Delicious!")+'</small>',pic:6,
-				cost:function(){var fail=0;for (var i in Game.Objects){if (Game.Objects[i].amount<50) fail=1;}return (fail==0);},
-				buy:function(){for (var i in Game.Objects){Game.Objects[i].sacrifice(50);}Game.Unlock('Dragon cookie');},
-				costStr:function(){return loc("%1 of every building",50);}},
+				cost:function(){var fail=0;for (var i in Game.Objects){if (Game.Objects[i].amount<250) fail=1;}return (fail==0);},
+				buy:function(){for (var i in Game.Objects){Game.Objects[i].sacrifice(250);}Game.Unlock('Dragon cookie');},
+				costStr:function(){return loc("%1 of every building",250);}},
 			{name:'Krumblor, cookie dragon',action:loc("Train secondary aura")+'<br><small>'+loc("Lets you use two dragon auras simultaneously")+'</small>',pic:7,
-				cost:function(){var fail=0;for (var i in Game.Objects){if (Game.Objects[i].amount<200) fail=1;}return (fail==0);},
-				buy:function(){for (var i in Game.Objects){Game.Objects[i].sacrifice(200);}},
-				costStr:function(){return loc("%1 of every building",200);}},
+				cost:function(){var fail=0;for (var i in Game.Objects){if (Game.Objects[i].amount<300) fail=1;}return (fail==0);},
+				buy:function(){for (var i in Game.Objects){Game.Objects[i].sacrifice(300);}},
+				costStr:function(){return loc("%1 of every building",300);}},
 			{name:'Krumblor, cookie dragon',action:loc("Your dragon is fully trained."),pic:8}
 		];
 		
@@ -15192,9 +15192,9 @@ Game.Launch=function()
 				it.action=loc("Train %1",Game.dragonAuras[i-3].dname)+'<br><small>'+loc("Aura: %1",Game.dragonAuras[i-3].desc)+'</small>';
 				if (i>=5)
 				{
-					it.costStr=function(building){return function(){return loc("%1 "+building.bsingle,LBeautify(100));}}(Game.ObjectsById[i-5]);
-					it.cost=function(building){return function(){return building.amount>=100;}}(Game.ObjectsById[i-5]);
-					it.buy=function(building){return function(){building.sacrifice(100);}}(Game.ObjectsById[i-5]);
+					it.costStr=function(building){return function(){return loc("%1 "+building.bsingle,LBeautify(200));}}(Game.ObjectsById[i-5]);
+					it.cost=function(building){return function(){return building.amount>=200;}}(Game.ObjectsById[i-5]);
+					it.buy=function(building){return function(){building.sacrifice(200);}}(Game.ObjectsById[i-5]);
 				}
 			}
 		}
