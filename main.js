@@ -5607,9 +5607,9 @@ Game.Launch=function()
 					me.life=1;//the cookie's current progression through its lifespan (in frames)
 					me.dur=13;//duration; the cookie's lifespan in seconds before it despawns
 					
-					var dur=13;
-					if (Game.Has('Lucky day')) dur*=2;
-					if (Game.Has('Serendipity')) dur*=2;
+					var dur=20;
+					if (Game.Has('Lucky day')) dur*=1.5;
+					if (Game.Has('Serendipity')) dur*=1.5;
 					if (Game.Has('Decisive fate')) dur*=1.05;
 					if (Game.Has('Lucky digit')) dur*=1.01;
 					if (Game.Has('Lucky number')) dur*=1.01;
@@ -5668,7 +5668,7 @@ Game.Launch=function()
 					
 					//select an effect
 					var list=[];
-					if (me.wrath>0) list.push('clot','multiply cookies','ruin cookies');
+					if (me.wrath>0) list.push('clot','multiply cookies','ruin cookies', 'frenzy');
 					else list.push('frenzy','multiply cookies');
 					if (me.wrath>0 && Game.hasGod && Game.hasGod('scorn')) list.push('clot','ruin cookies','clot','ruin cookies');
 					if (me.wrath>0 && Math.random()<0.3) list.push('blood frenzy','chain cookie','cookie storm');
@@ -5691,15 +5691,15 @@ Game.Launch=function()
 						if (Math.random()<Game.auraMult('Dragonflight')) list.push('dragonflight');
 					}
 					
-					if (this.last!='' && Math.random()<0.8 && list.indexOf(this.last)!=-1)//80% chance to force a different one
+					if (this.last!='' && Math.random()<0.6 && list.indexOf(this.last)!=-1) //60% chance to force a different one
 					{
 						while (list.indexOf(this.last)!=-1)
 						{
 							list.splice(list.indexOf(this.last),1);
 						}
 					}
-					
-					if (Math.random()<0.0001) list.push('blab');
+					list.push('blab');
+					if (Math.random()<0.40) list.push('blab');
 					
 					var choice=choose(list);
 					
@@ -5751,9 +5751,9 @@ Game.Launch=function()
 						var list=[];
 						for (var i in Game.Objects)
 						{
-							if (Game.Objects[i].amount>=10) list.push(Game.Objects[i].id);
+							if (Game.Objects[i].amount>=50) list.push(Game.Objects[i].id);
 						}
-						if (list.length==0) {choice='frenzy';}//default to frenzy if no proper building
+						if (list.length==0) {choice='long frenzy';}//default to endurance frenzy if no proper building
 						else
 						{
 							var obj=choose(list);
@@ -5836,13 +5836,13 @@ Game.Launch=function()
 						var digit=me.wrath?6:7;
 						if (this.chain==1) this.chain+=Math.max(0,Math.ceil(Math.log(Game.cookies)/Math.LN10)-10);
 						
-						var maxPayout=Math.min(Game.cookiesPs*60*60*6,Game.cookies*0.5)*mult;
+						var maxPayout=Math.min(Game.cookiesPs*60*60*2,Game.cookiesPs*60*60*2)*mult;
 						var moni=Math.max(digit,Math.min(Math.floor(1/9*Math.pow(10,this.chain)*digit*mult),maxPayout));
 						var nextMoni=Math.max(digit,Math.min(Math.floor(1/9*Math.pow(10,this.chain+1)*digit*mult),maxPayout));
 						this.totalFromChain+=moni;
 
 						//break the chain if we're above 5 digits AND it's more than 50% of our bank, it grants more than 6 hours of our CpS, or just a 1% chance each digit (update : removed digit limit)
-						if (Math.random()<0.01 || nextMoni>=maxPayout)
+						if (nextMoni>=maxPayout)
 						{
 							this.chain=0;
 							popup=loc("Cookie chain")+'<br><small>'+loc("+%1!",loc("%1 cookie",LBeautify(moni)))+'<br>'+loc("Cookie chain over. You made %1.",loc("%1 cookie",LBeautify(this.totalFromChain)))+'</small>';
@@ -5863,47 +5863,34 @@ Game.Launch=function()
 						Game.Earn(moni);
 						popup='<div style="font-size:75%;">'+loc("+%1!",loc('%1 cookie',LBeautify(moni)))+'</div>';
 					}
-					else if (choice=='blab')//sorry (it's really rare)
+					else if (choice=='blab') // useless
 					{
 						var str=EN?(choose([
-						'Cookie crumbliness x3 for 60 seconds!',
-						'Chocolatiness x7 for 77 seconds!',
-						'Dough elasticity halved for 66 seconds!',
-						'Golden cookie shininess doubled for 3 seconds!',
-						'World economy halved for 30 seconds!',
-						'Grandma kisses 23% stingier for 45 seconds!',
-						'Thanks for clicking!',
-						'Fooled you! This one was just a test.',
-						'Golden cookies clicked +1!',
-						'Your click has been registered. Thank you for your cooperation.',
-						'Thanks! That hit the spot!',
-						'Thank you. A team has been dispatched.',
-						'They know.',
-						'Oops. This was just a chocolate cookie with shiny aluminium foil.',
-						'Eschaton immanentized!',
-						'Oh, that tickled!',
-						'Again.',
-						'You\'ve made a grave mistake.',
-						'Chocolate chips reshuffled!',
-						'Randomized chance card outcome!',
-						'Mouse acceleration +0.03%!',
-						'Ascension bonuses x5,000 for 0.1 seconds!',
-						'Gained 1 extra!',
-						'Sorry, better luck next time!',
-						'I felt that.',
-						'Nice try, but no.',
-						'Wait, sorry, I wasn\'t ready yet.',
-						'Yippee!',
-						'Bones removed.',
-						'Organs added.',
-						'Did you just click that?',
-						'Huh? Oh, there was nothing there.',
-						'You saw nothing.',
-						'It seems you hallucinated that golden cookie.',
-						'This golden cookie was a complete fabrication.',
-						'In theory there\'s no wrong way to click a golden cookie, but you just did that, somehow.',
-						'All cookies multiplied by 999!<br>All cookies divided by 999!',
-						'Why?'
+						'Why... are you here?',
+						'Why... are you here?',
+						'Why... are you here?',
+						'...thank you!',
+						"She didn't ghost you, she's just gathering the courage to match your aura.",
+						"The reply is taking a while because she's trying not to seem too excited.",
+						'Great things take time. One example would be her replies.',
+						"She didn't ghost you, she's just pondering how to respond.",
+						"She isn't coming back...",
+						"She misses you...",
+						"You miss her. She missed your notification.",
+						"The text was delivered... but the dream was not.",
+						"Don't text her too much. It makes you seem desperate.",
+						'She was never yours to begin with.',
+						"Hey... looks don't matter to her much, right...?",
+						"Hey... maybe she's just really busy these days...?",
+						"Maybe there's still a chance...",
+						"She liked the message. That's basically a conversation...",
+						"Maybe she's writing a really long response...",
+						"She hasn't replied yet, but she hasn't said no again either...",
+						"You're like a brother to me!",
+						"Why love her... if you can't have her?",
+						"You think the 'seen' means she was speechless...?",
+						"At least she didn't block you :)",
+						"I'm sure she's just busy.",
 						])):choose(loc("Cookie blab"));
 						popup=str;
 					}
@@ -5943,8 +5930,9 @@ Game.Launch=function()
 				maxTime:0,
 				getTimeMod:function(me,m)
 				{
-					if (Game.Has('Lucky day')) m/=2;
-					if (Game.Has('Serendipity')) m/=2;
+					m/=3;
+					if (Game.Has('Lucky day')) m/=1.5;
+					if (Game.Has('Serendipity')) m/=1.5;
 					if (Game.Has('Golden goose egg')) m*=0.95;
 					if (Game.Has('Heavenly luck')) m*=0.95;
 					if (Game.Has('Green yeast digestives')) m*=0.99;
@@ -10326,8 +10314,8 @@ Game.Launch=function()
 		order=900;Game.TieredUpgrade('Causality enforcer','<q>What happened, happened.</q>','Time machine',4);
 		
 		order=5000;
-		new Game.Upgrade('Lucky day',loc("Golden cookies appear <b>twice as often</b> and stay <b>twice as long</b>.")+'<q>Oh hey, a four-leaf penny!</q>',777777777,[27,6]);
-		new Game.Upgrade('Serendipity',loc("Golden cookies appear <b>twice as often</b> and stay <b>twice as long</b>.")+'<q>What joy! Seven horseshoes!</q>',77777777777,[27,6]);
+		new Game.Upgrade('Lucky day',loc("Golden cookies appear <b>50% more often</b> and stay <b>50% longer</b>.")+'<q>Oh hey, a four-leaf penny!</q>',777777777,[27,6]);
+		new Game.Upgrade('Serendipity',loc("Golden cookies appear <b>50% more often</b> and stay <b>50% longer</b>.")+'<q>What joy! Seven horseshoes!</q>',77777777777,[27,6]);
 		
 		order=20000;
 		new Game.Upgrade('Kitten engineers',strKittenDesc+'<q>meow meow meow meow, sir</q>',90000000000000,Game.GetIcon('Kitten',3));Game.last.kitten=1;Game.MakeTiered(Game.last,3,18);
@@ -10408,10 +10396,10 @@ Game.Launch=function()
 		
 		
 		order=150;
-		new Game.Upgrade('Plastic mouse',getStrClickingGains(1)+'<q>Slightly squeaky.</q>',50000,[11,0]);Game.MakeTiered(Game.last,1,11);
-		new Game.Upgrade('Iron mouse',getStrClickingGains(1)+'<q>Click like it\'s 1349!</q>',5000000,[11,1]);Game.MakeTiered(Game.last,2,11);
-		new Game.Upgrade('Titanium mouse',getStrClickingGains(1)+'<q>Heavy, but powerful.</q>',500000000,[11,2]);Game.MakeTiered(Game.last,3,11);
-		new Game.Upgrade('Adamantium mouse',getStrClickingGains(1)+'<q>You could cut diamond with these.</q>',50000000000,[11,13]);Game.MakeTiered(Game.last,4,11);
+		new Game.Upgrade('Plastic mouse',getStrClickingGains(1)+'<q>Slightly squeaky.</q>',100000,[11,0]);Game.MakeTiered(Game.last,1,11);
+		new Game.Upgrade('Iron mouse',getStrClickingGains(1)+'<q>Click like it\'s 1349!</q>',20000000,[11,1]);Game.MakeTiered(Game.last,2,11);
+		new Game.Upgrade('Titanium mouse',getStrClickingGains(1)+'<q>Heavy, but powerful.</q>',4000000000,[11,2]);Game.MakeTiered(Game.last,3,11);
+		new Game.Upgrade('Adamantium mouse',getStrClickingGains(1)+'<q>You could cut diamond with these.</q>',800000000000,[11,13]);Game.MakeTiered(Game.last,4,11);
 		
 		order=40000;
 		new Game.Upgrade('Ultrascience',loc("Research takes only <b>5 seconds</b>.")+'<q>YEAH, SCIENCE!</q>',7,[9,2]);//debug purposes only
@@ -10506,7 +10494,7 @@ Game.Launch=function()
 		order=1000;Game.TieredUpgrade('Reverse cyclotrons','<q>These can uncollision particles and unspin atoms. For... uh... better flavor, and stuff.</q>','Antimatter condenser',5);
 		
 		order=150;
-		new Game.Upgrade('Unobtainium mouse',getStrClickingGains(1)+'<q>These nice mice should suffice.</q>',5000000000000,[11,14]);Game.MakeTiered(Game.last,5,11);
+		new Game.Upgrade('Unobtainium mouse',getStrClickingGains(1)+'<q>These nice mice should suffice.</q>',160000000000000,[11,14]);Game.MakeTiered(Game.last,5,11);
 		
 		order=10030;
 		Game.NewUpgradeCookie({name:'Caramoas',desc:'Yeah. That\'s got a nice ring to it.',icon:[14,4],require:'Box of brand biscuits',power:					3,	price:	9999999999999999});
@@ -10663,8 +10651,8 @@ Game.Launch=function()
 		new Game.Upgrade('Septillion fingers',getStrThousandFingersGain(20)+'<q>[cursory flavor text]</q>',10000000000000000000,[12,20]);Game.MakeTiered(Game.last,11,0);
 		new Game.Upgrade('Octillion fingers',getStrThousandFingersGain(20)+'<q>Turns out you <b>can</b> quite put your finger on it.</q>',10000000000000000000000,[12,19]);Game.MakeTiered(Game.last,12,0);
 		
-		order=150;new Game.Upgrade('Eludium mouse',getStrClickingGains(1)+'<q>I rodent do that if I were you.</q>',500000000000000,[11,15]);Game.MakeTiered(Game.last,6,11);
-		new Game.Upgrade('Wishalloy mouse',getStrClickingGains(1)+'<q>Clicking is fine and dandy, but don\'t smash your mouse over it. Get your game on. Go play.</q>',50000000000000000,[11,16]);Game.MakeTiered(Game.last,7,11);
+		order=150;new Game.Upgrade('Eludium mouse',getStrClickingGains(1)+'<q>I rodent do that if I were you.</q>',16000000000000000,[11,15]);Game.MakeTiered(Game.last,6,11);
+		new Game.Upgrade('Wishalloy mouse',getStrClickingGains(1)+'<q>Clicking is fine and dandy, but don\'t smash your mouse over it. Get your game on. Go play.</q>',1600000000000000000,[11,16]);Game.MakeTiered(Game.last,7,11);
 		order=200;Game.TieredUpgrade('Aging agents','<q>Counter-intuitively, grandmas have the uncanny ability to become more powerful the older they get.</q>','Grandma',6);
 		order=300;Game.TieredUpgrade('Pulsar sprinklers','<q>There\'s no such thing as over-watering. The moistest is the bestest.</q>','Farm',6);
 		order=500;Game.TieredUpgrade('Deep-bake process','<q>A patented process increasing cookie yield two-fold for the same amount of ingredients. Don\'t ask how, don\'t take pictures, and be sure to wear your protective suit.</q>','Factory',6);
@@ -11135,8 +11123,8 @@ Game.Launch=function()
 		
 		new Game.Upgrade('Residual luck',loc("While the golden switch is on, you gain an additional <b>+%1% CpS</b> per golden cookie upgrade owned.",10)+'<q>Fortune comes in many flavors.</q>',99999,[27,6]);Game.last.pool='prestige';Game.last.parents=['Golden switch'];
 		
-		order=150;new Game.Upgrade('Fantasteel mouse',getStrClickingGains(1)+'<q>You could be clicking using your touchpad and we\'d be none the wiser.</q>',5000000000000000000,[11,17]);Game.MakeTiered(Game.last,8,11);
-		new Game.Upgrade('Nevercrack mouse',getStrClickingGains(1)+'<q>How much beefier can you make a mouse until it\'s considered a rat?</q>',500000000000000000000,[11,18]);Game.MakeTiered(Game.last,9,11);
+		order=150;new Game.Upgrade('Fantasteel mouse',getStrClickingGains(1)+'<q>You could be clicking using your touchpad and we\'d be none the wiser.</q>',160000000000000000000,[11,17]);Game.MakeTiered(Game.last,8,11);
+		new Game.Upgrade('Nevercrack mouse',getStrClickingGains(1)+'<q>How much beefier can you make a until it\'s considered a rat?</q>',16000000000000000000000,[11,18]);Game.MakeTiered(Game.last,9,11);
 		
 		
 		new Game.Upgrade('Five-finger discount',loc("All upgrades are <b>%1% cheaper per %2</b>.",[1,loc("%1 cursor",100)])+'<q>Stick it to the man.</q>',555555,[28,7],function(){Game.upgradesToRebuild=1;});Game.last.pool='prestige';Game.last.parents=['Halo gloves','Abaddon'];
@@ -11320,7 +11308,7 @@ Game.Launch=function()
 		Game.NewUpgradeCookie({name:'Birthday cookie',desc:'<q>-</q>',icon:[22,13],power:years,price:99999999999999999999999999999});Game.last.baseDesc=loc("Cookie production multiplier <b>+%1%</b> for every year Cookie Clicker has existed (currently: <b>+%2%</b>).",[1,Beautify(years)])+'<q>Thank you for playing Cookie Clicker!<br>-Orteil</q>';
 		
 		
-		order=150;new Game.Upgrade('Armythril mouse',getStrClickingGains(1)+'<q>This one takes about 53 people to push it around and another 48 to jump down on the button and trigger a click. You could say it\'s got some heft to it.</q>',50000000000000000000000,[11,19]);Game.MakeTiered(Game.last,10,11);
+		order=150;new Game.Upgrade('Armythril mouse',getStrClickingGains(1)+'<q>This one takes about 53 people to push it around and another 48 to jump down on the button and trigger a click. You could say it\'s got some heft to it.</q>',1600000000000000000000000,[11,19]);Game.MakeTiered(Game.last,10,11);
 		
 		order=200;Game.TieredUpgrade('Reverse dementia','<q>Extremely unsettling, and somehow even worse than the regular kind.</q>','Grandma',9);
 		order=300;Game.TieredUpgrade('Humane pesticides','<q>Made by people, for people, from people and ready to unleash some righteous scorching pain on those pesky insects that so deserve it.</q>','Farm',9);
@@ -11382,8 +11370,8 @@ Game.Launch=function()
 		Game.last.pool='debug';
 		
 		order=150;
-		new Game.Upgrade('Technobsidian mouse',getStrClickingGains(1)+'<q>A highly advanced mouse of a sophisticated design. Only one thing on its mind : to click.</q>',5000000000000000000000000,[11,28]);Game.MakeTiered(Game.last,11,11);
-		new Game.Upgrade('Plasmarble mouse',getStrClickingGains(1)+'<q>A shifting blur in the corner of your eye, this mouse can trigger a flurry of clicks when grazed by even the slightest breeze.</q>',500000000000000000000000000,[11,30]);Game.MakeTiered(Game.last,12,11);
+		new Game.Upgrade('Technobsidian mouse',getStrClickingGains(1)+'<q>A highly advanced mouse of a sophisticated design. Only one thing on its mind : to click.</q>',160000000000000000000000000,[11,28]);Game.MakeTiered(Game.last,11,11);
+		new Game.Upgrade('Plasmarble mouse',getStrClickingGains(1)+'<q>A shifting blur in the corner of your eye, this mouse can trigger a flurry of clicks when grazed by even the slightest breeze.</q>',16000000000000000000000000000,[11,30]);Game.MakeTiered(Game.last,12,11);
 		
 		order=20000;
 		new Game.Upgrade('Kitten marketeers',strKittenDesc+'<q>no such thing as a saturated markit, sir</q>',900000000000000000000000000000000000000,Game.GetIcon('Kitten',11));Game.last.kitten=1;Game.MakeTiered(Game.last,11,18);
@@ -11825,7 +11813,7 @@ Game.Launch=function()
 		Game.NewUpgradeCookie({name:'Cosmic chocolate butter biscuit',desc:'Rewarded for owning 550 of everything.<br>Through some strange trick of magic or technology, looking at this cookie is like peering into a deep ocean of ancient stars. The origins of this biscuit are unknown; its manufacture, as far as your best investigators can tell, left no paper trail. From a certain angle, if you squint hard enough, you\'ll notice that a number of stars near the center are arranged to resemble the outline of your own face.',icon:[27,32],power:	10,price: 999999999999999999999999999999999999999999999999*butterBiscuitMult,locked:1});
 		
 		order=100;new Game.Upgrade('Nonillion fingers',getStrThousandFingersGain(20)+'<q>Only for the freakiest handshakes.</q>',10000000000000000000000000,[12,31]);Game.MakeTiered(Game.last,13,0);
-		order=150;new Game.Upgrade('Miraculite mouse',getStrClickingGains(1)+'<q>Composed of a material that neither science nor philosophy are equipped to conceptualize. And boy, does it ever click.</q>',50000000000000000000000000000,[11,31]);Game.MakeTiered(Game.last,13,11);
+		order=150;new Game.Upgrade('Miraculite mouse',getStrClickingGains(1)+'<q>Composed of a material that neither science nor philosophy are equipped to conceptualize. And boy, does it ever click.</q>',1600000000000000000000000000000,[11,31]);Game.MakeTiered(Game.last,13,11);
 		order=200;Game.TieredUpgrade('Generation degeneration','<q>Genetic testing shows that most of your grandmas are infected with a strange degenerative disease that only seems to further their powers; the more time passes, the older they get. This should concern you.</q>','Grandma',12);
 		order=300;Game.TieredUpgrade('Global seed vault','<q>An enormous genetic repository that could outlive an apocalypse. Guarantees the survival of your empire, or at the very least its agricultural components, should civilization fall. Which should be any day now.</q>','Farm',12);
 		order=400;Game.TieredUpgrade('Air mining','<q>You\'ve dug your drills through just about every solid surface you could find. But did you know recent advances have revealed untold riches hiding within non-solid surfaces too?</q>','Mine',12);
@@ -11972,7 +11960,7 @@ Game.Launch=function()
 		Game.TieredUpgrade('Fortune #019','<q>The smartest way to think is not to think at all.</q>','Cortex baker','fortune');
 		
 		order=100;new Game.Upgrade('Decillion fingers',getStrThousandFingersGain(20)+'<q>If you still can\'t quite put your finger on it, you must not be trying very hard.</q>',10000000000000000000000000000,[12,34]);Game.MakeTiered(Game.last,14,0);
-		order=150;new Game.Upgrade('Aetherice mouse',getStrClickingGains(1)+'<q>Made from a substance impossible to manufacture, only obtained through natural happenstance; its properties bewilder even the most precise measuring instruments.</q>',5000000000000000000000000000000,[11,34]);Game.MakeTiered(Game.last,14,11);
+		order=150;new Game.Upgrade('Aetherice mouse',getStrClickingGains(1)+'<q>Made from a substance impossible to manufacture, only obtained through natural happenstance; its properties bewilder even the most precise measuring instruments.</q>',160000000000000000000000000000000,[11,34]);Game.MakeTiered(Game.last,14,11);
 		
 		order=20000;
 		new Game.Upgrade('Kitten admins',strKittenDesc+'<q>leadership ain\'t easy, sir</q>',900000000000000000000000000000000000000000000000,Game.GetIcon('Kitten',14));Game.last.kitten=1;Game.MakeTiered(Game.last,14,18);
@@ -12675,7 +12663,7 @@ Game.Launch=function()
 		Game.NewUpgradeCookie({name:'Springerles',desc:'A springerle is an ancient anise-flavored biscuit from Central Europe, imprinted by a wooden mold with any kind of interesting design such as a commemorative scene, an intricate pattern or, ah, perhaps a little horsie.',icon:[27,36],power:						5,price: getCookiePrice(62)});
 		
 		order=100;new Game.Upgrade('Undecillion fingers',getStrThousandFingersGain(20)+'<q>Whatever you touch<br>turns to dough in your clutch.</q>',10000000000000000000000000000000,[12,36]);Game.MakeTiered(Game.last,15,0);
-		order=150;new Game.Upgrade('Omniplast mouse',getStrClickingGains(1)+'<q>This mouse is, by virtue of the strange elements that make it up, present in every position in space simultaneously, in a manner; this alleviates its owner from the need to move it around, redirecting all such kinetic power to the intensity of its clicks.</q>',500000000000000000000000000000000,[11,36]);Game.MakeTiered(Game.last,15,11);
+		order=150;new Game.Upgrade('Omniplast mouse',getStrClickingGains(1)+'<q>This mouse is, by virtue of the strange elements that make it up, present in every position in space simultaneously, in a manner; this alleviates its owner from the need to move it around, redirecting all such kinetic power to the intensity of its clicks.</q>',16000000000000000000000000000000000,[11,36]);Game.MakeTiered(Game.last,15,11);
 		
 		
 		order=25050;new Game.Upgrade('Wrinkler ambergris',getStrCookieProductionMultiplierPlus(6)+'<br>'+loc("All upgrades are <b>%1% cheaper</b>.",1)+'<br>'+loc("Cost scales with CpS.")+'<q>Occasionally regurgitated by wrinklers.<br>The byproduct of some obscure metabolic process or other, it is as rare and precious as it is pungent.<br>Makes for a great toast spread.</q>',60,[31,36],function(){Game.upgradesToRebuild=1;});
@@ -15146,21 +15134,21 @@ Game.Launch=function()
 				buy:function(){Game.Spend(1000000);},
 				costStr:function(){return loc("%1 cookie",LBeautify(1000000));}},
 			{name:'Dragon egg',action:loc("Chip it"),pic:1,
-				cost:function(){return Game.cookies>=1000000*1000;},
-				buy:function(){Game.Spend(1000000*1000);},
-				costStr:function(){return loc("%1 cookie",LBeautify(1000000*1000));}},
+				cost:function(){return Game.cookies>=1000000*100;},
+				buy:function(){Game.Spend(1000000*100);},
+				costStr:function(){return loc("%1 cookie",LBeautify(1000000*100));}},
 			{name:'Dragon egg',action:loc("Chip it"),pic:2,
-				cost:function(){return Game.cookies>=1000000*1000*1000;},
-				buy:function(){Game.Spend(1000000*1000*1000);},
-				costStr:function(){return loc("%1 cookie",LBeautify(1000000*1000*1000));}},
+				cost:function(){return Game.cookies>=1000000*100*100;},
+				buy:function(){Game.Spend(1000000*100*100);},
+				costStr:function(){return loc("%1 cookie",LBeautify(1000000*100*100));}},
 			{name:'Shivering dragon egg',action:loc("Hatch it"),pic:3,
-				cost:function(){return Game.cookies>=1000000*1000*1000*1000;},
-				buy:function(){Game.Spend(1000000*1000*1000*1000);},
-				costStr:function(){return loc("%1 cookie",LBeautify(1000000*1000*1000*1000));}},
+				cost:function(){return Game.cookies>=1000000*100*100*100;},
+				buy:function(){Game.Spend(1000000*100*100*100);},
+				costStr:function(){return loc("%1 cookie",LBeautify(1000000*100*100*100));}},
 			{name:'Krumblor, cookie hatchling',action:'Train Breath of Milk<br><small>Aura: kittens are 5% more effective</small>',pic:4,
-				cost:function(){return Game.cookies>=1000000*1000*1000*1000*1000;},
-				buy:function(){Game.Spend(1000000*1000*1000*1000*1000);},
-				costStr:function(){return loc("%1 cookie",LBeautify(1000000*1000*1000*1000*1000));}},
+				cost:function(){return Game.cookies>=1000000*100*100*100*100;},
+				buy:function(){Game.Spend(1000000*100*100*100*100);},
+				costStr:function(){return loc("%1 cookie",LBeautify(1000000*100*100*100*100));}},
 			{name:'Krumblor, cookie hatchling',action:'Train Dragon Cursor<br><small>Aura: clicking is 5% more effective</small>',pic:4,},
 			{name:'Krumblor, cookie hatchling',action:'Train Elder Battalion<br><small>Aura: grandmas gain +1% CpS for every non-grandma building</small>',pic:4,},
 			{name:'Krumblor, cookie hatchling',action:'Train Reaper of Fields<br><small>Aura: golden cookies may trigger a Dragon Harvest</small>',pic:4,},
@@ -15701,7 +15689,7 @@ Game.Launch=function()
 					else
 					{
 						l('backgroundCanvas').style.background='transparent';
-						Game.defaultBg='bgBlue';
+						Game.defaultBg='bgMint';
 						Game.bgR=0;
 						
 						if (Game.season=='fools') Game.defaultBg='bgMoney';
@@ -16742,7 +16730,7 @@ Game.Launch=function()
 			/*=====================================================================================
 			UNLOCKING STUFF
 			=======================================================================================*/
-			if (Game.T%(Game.fps)==0 && Math.random()<1/1000000) Game.Win('Just plain lucky');//1 chance in 1,000,000 every second achievement
+			if (Game.T%(Game.fps)==0 && Math.random()<1/100000) Game.Win('Just plain lucky');//1 chance in 1,000,000 every second achievement
 			if (Game.T%(Game.fps*5)==0 && Game.ObjectsById.length>0)//check some achievements and upgrades
 			{
 				if (isNaN(Game.cookies)) {Game.cookies=0;Game.cookiesEarned=0;Game.recalculateGains=1;}
