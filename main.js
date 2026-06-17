@@ -5674,6 +5674,8 @@ Game.Launch=function()
 					if (me.wrath>0 && Math.random()<0.3) list.push('blood frenzy','chain cookie','cookie storm');
 					else if (Math.random()<0.03 && Game.cookiesEarned>=100000) list.push('chain cookie','cookie storm');
 					if (Math.random()<0.05 && Game.season=='fools') list.push('everything must go');
+					if (Math.random()<0.02) list.push('long frenzy');
+					if (Math.random()<0.02) list.push('dragon essence');
 					if (Math.random()<0.1 && (Math.random()<0.05 || !Game.hasBuff('Dragonflight'))) list.push('click frenzy');
 					if (me.wrath && Math.random()<0.1) list.push('cursed finger');
 					
@@ -5780,6 +5782,10 @@ Game.Launch=function()
 					{
 						buff=Game.gainBuff('dragon harvest',Math.ceil(60*effectDurMod),15);
 					}
+					else if (choice=='dragon essence')
+					{
+						buff=Game.gainBuff('dragon essence',Math.ceil(10*effectDurMod),1000);
+					}
 					else if (choice=='everything must go')
 					{
 						buff=Game.gainBuff('everything must go',Math.ceil(8*effectDurMod),5);
@@ -5800,6 +5806,10 @@ Game.Launch=function()
 					else if (choice=='blood frenzy')
 					{
 						buff=Game.gainBuff('blood frenzy',Math.ceil(6*effectDurMod),666);
+					}
+					else if (choice=='long frenzy')
+					{
+						buff=Game.gainBuff('long frenzy',Math.ceil(30*60*effectDurMod),2);
 					}
 					else if (choice=='clot')
 					{
@@ -6125,6 +6135,7 @@ Game.Launch=function()
 			"Lucky","multiply cookies",
 			"Ruin","ruin cookies",
 			"Elder frenzy","blood frenzy",
+			"Endurance frenzy","long frenzy",
 			"Clot","clot",
 			"Click frenzy","click frenzy",
 			"Cursed finger","cursed finger",
@@ -6132,6 +6143,7 @@ Game.Launch=function()
 			"Cookie storm","cookie storm",
 			"Building special","building special",
 			"Dragon Harvest","dragon harvest",
+			"Dragon Essence","dragon essence",
 			"Dragonflight","dragonflight",
 			"Sweet","free sugar lump",
 			"Blab","blab"
@@ -14207,6 +14219,18 @@ Game.Launch=function()
 				aura:1
 			};
 		});
+		new Game.buffType('long frenzy',function(time,pow)
+		{
+			return {
+				name:'Endurance frenzy',
+				desc:loc("Cookie production x%1 for %2!",[pow,Game.sayTime(time*Game.fps,-1)]),
+				icon:[29,6],
+				time:time*Game.fps,
+				add:true,
+				multCpS:pow,
+				aura:1
+			};
+		});
 		new Game.buffType('clot',function(time,pow)
 		{
 			return {
@@ -14224,6 +14248,19 @@ Game.Launch=function()
 			if (Game.Has('Dragon fang')) pow=Math.ceil(pow*1.1);
 			return {
 				name:'Dragon Harvest',
+				desc:loc("Cookie production x%1 for %2!",[pow,Game.sayTime(time*Game.fps,-1)]),
+				icon:[10,25],
+				time:time*Game.fps,
+				add:true,
+				multCpS:pow,
+				aura:1
+			};
+		});
+		new Game.buffType('dragon essence',function(time,pow)
+		{
+			if (Game.Has('Dragon fang')) pow=Math.ceil(pow*1.1);
+			return {
+				name:'Dragon Essence',
 				desc:loc("Cookie production x%1 for %2!",[pow,Game.sayTime(time*Game.fps,-1)]),
 				icon:[10,25],
 				time:time*Game.fps,
@@ -15728,7 +15765,7 @@ Game.Launch=function()
 				Timer.clean();
 				
 				var showDragon=0;
-				if (Game.hasBuff('Dragonflight') || Game.hasBuff('Dragon Harvest')) showDragon=1;
+				if (Game.hasBuff('Dragonflight') || Game.hasBuff('Dragon Harvest') || Game.hasBuff('Dragon Essence')) showDragon=1;
 				
 				Game.cookieOriginX=Math.floor(ctx.canvas.width/2);
 				Game.cookieOriginY=Math.floor(ctx.canvas.height*0.4);
