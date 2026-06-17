@@ -2616,24 +2616,14 @@ Game.Launch=function()
 		
 		Game.externalDataLoaded=false;
 		
-		Game.grandmaNames=['Granny','Gusher','Ethel','Edna','Doris','Maud','Hilda','Gladys','Michelle','Michele','Phyllis','Millicent','Muriel','Myrtle','Mildred','Mavis','Helen','Gloria','Sheila','Betty','Gertrude','Agatha','Beryl','Agnes','Pearl','Precious','Ruby','Vera','Bonnie','Ada','Bunny','Cookie','Darling','Gaga','GamGam','Memaw','Mimsy','Peanut','Nana','Nan','Tootsie','Warty','Stinky','Heinous'];
+		Game.grandmaNames=['Justin', 'Cecilia', 'Ellie', 'Cleo', 'Jessica', 'Yan Tong', 'Isabelle', 'Jenny'];
 		Game.customGrandmaNames=[];
 		Game.heralds=0;
 		
 		Game.UpdateHeralds=function()
 		{
-			if (!App) getJson(DataDir+'cookieclickersteam.json',function(r){
-				Game.heralds=r?(parseInt(r.steamPlayers||1)):1;
-				Game.heralds=Math.max(0,Math.min(100,Math.ceil(Game.heralds/100*100)/100));
-				l('heraldsAmount').textContent=Math.floor(Game.heralds);
-				Game.externalDataLoaded=true;
-			});
-			else App.grabData(function(r){
-				Game.heralds=r?(parseInt(r.playersN)||1):1;
-				Game.heralds=Math.max(0,Math.min(100,Math.ceil(Game.heralds/100*100)/100));
-				l('heraldsAmount').textContent=Math.floor(Game.heralds);
-				Game.externalDataLoaded=true;
-			});
+			Game.heralds = 50;
+			Game.externalDataLoaded=true;
 		};
 		Game.FetchGrandmaNames=function()
 		{
