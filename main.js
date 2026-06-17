@@ -5898,7 +5898,7 @@ Game.Launch=function()
 					}
 					else if (choice == 'golden surge') 
 					{
-					    buff = Game.gainBuff('golden surge', Math.ceil(60 * 60 * effectDurMod), 1.5);
+					    buff = Game.gainBuff('golden surge', Math.ceil(60 * 36 * effectDurMod), 1.5);
 					}
 					
 					if (popup=='' && buff && buff.name && buff.desc) popup=buff.dname+'<div style="font-size:65%;">'+buff.desc+'</div>';
@@ -14550,7 +14550,7 @@ Game.Launch=function()
 		new Game.buffType('golden surge', function(time, pow) {
 		    return {
 		        name: 'Golden surge',
-		        desc: loc("Golden cookies appear <b>50%</b> more often for the next hour!"),
+		        desc: loc("Golden cookies appear %1% more for %2!", [Math.round((pow - 1) * 100),Game.sayTime(time*Game.fps,-1)])),
 		        icon: [22, 6],
 		        time: time * Game.fps,
 		        add: true
