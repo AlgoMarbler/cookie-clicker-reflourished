@@ -14550,7 +14550,7 @@ Game.Launch=function()
 		new Game.buffType('golden surge', function(time, pow) {
 		    return {
 		        name: 'Golden surge',
-		        desc: loc("Golden cookies appear %1% more for %2!", [Math.round((pow - 1) * 100),Game.sayTime(time*Game.fps,-1)])),
+		        desc: loc("Golden cookies appear %1% more often for %2!", [(pow-1)*100, Game.sayTime(time*Game.fps,-1)]),
 		        icon: [22, 6],
 		        time: time * Game.fps,
 		        add: true
