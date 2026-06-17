@@ -14224,7 +14224,7 @@ Game.Launch=function()
 			return {
 				name:'Endurance frenzy',
 				desc:loc("Cookie production x%1 for %2!",[pow,Game.sayTime(time*Game.fps,-1)]),
-				icon:[29,6],
+				icon:[10,14],
 				time:time*Game.fps,
 				add:true,
 				multCpS:pow,
