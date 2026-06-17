@@ -5691,6 +5691,8 @@ Game.Launch=function()
 						if (Math.random()<Game.auraMult('Dragonflight')) list.push('dragonflight');
 					}
 					
+					if (Math.random() < 0.05) list.push('golden surge');
+
 					if (this.last!='' && Math.random()<0.6 && list.indexOf(this.last)!=-1) //60% chance to force a different one
 					{
 						while (list.indexOf(this.last)!=-1)
@@ -5894,6 +5896,10 @@ Game.Launch=function()
 						])):choose(loc("Cookie blab"));
 						popup=str;
 					}
+					else if (choice == 'golden surge') 
+					{
+					    buff = Game.gainBuff('golden surge', Math.ceil(60 * 60 * effectDurMod), 1.5);
+					}
 					
 					if (popup=='' && buff && buff.name && buff.desc) popup=buff.dname+'<div style="font-size:65%;">'+buff.desc+'</div>';
 					if (popup!='') Game.Popup(popup,me.x+me.l.offsetWidth/2,me.y);
@@ -5939,6 +5945,7 @@ Game.Launch=function()
 					//if (Game.hasAura('Arcane Aura')) m*=0.95;
 					m*=1-Game.auraMult('Arcane Aura')*0.05;
 					if (Game.hasBuff('Sugar blessing')) m*=0.9;
+					if (Game.hasBuff('Golden surge')) m/=1.5;
 					if (Game.season=='easter' && Game.Has('Starspawn')) m*=0.98;
 					else if (Game.season=='halloween' && Game.Has('Starterror')) m*=0.98;
 					else if (Game.season=='valentines' && Game.Has('Starlove')) m*=0.98;
@@ -6134,7 +6141,8 @@ Game.Launch=function()
 			"Dragon Essence","dragon essence",
 			"Dragonflight","dragonflight",
 			"Sweet","free sugar lump",
-			"Blab","blab"
+			"Blab","blab",
+			"Golden Surge", "golden surge",
 		];
 		Game.goldenCookieBuildingBuffs={
 			'Cursor':['High-five','Slap to the face'],
@@ -14539,7 +14547,15 @@ Game.Launch=function()
 				max:true
 			};
 		});
-		
+		new Game.buffType('golden surge', function(time, pow) {
+		    return {
+		        name: 'Golden surge',
+		        desc: loc("Golden cookies appear <b>50%</b> more often for the next hour!"),
+		        icon: [22, 6],
+		        time: time * Game.fps,
+		        add: true
+		    };
+		});
 		//end of buffs
 		
 		
