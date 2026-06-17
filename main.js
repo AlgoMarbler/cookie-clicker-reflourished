@@ -5898,7 +5898,7 @@ Game.Launch=function()
 					}
 					else if (choice == 'golden surge') 
 					{
-					    buff = Game.gainBuff('golden surge', Math.ceil(60 * 36 * effectDurMod), 1.5);
+					    buff = Game.gainBuff('golden surge', Math.ceil(60 * 45 * effectDurMod), 1.5);
 					}
 					
 					if (popup=='' && buff && buff.name && buff.desc) popup=buff.dname+'<div style="font-size:65%;">'+buff.desc+'</div>';
