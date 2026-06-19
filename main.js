@@ -8024,8 +8024,8 @@ Game.Launch=function()
 				if (this.id>=14) this.basePrice*=2;
 				if (this.id>=16) this.basePrice*=5;
 				if (this.id>=17) this.basePrice*=15;
-				if (this.id>=18) this.basePrice*=50;
-				if (this.id>=19) this.basePrice*=10000;
+				if (this.id>=18) this.basePrice*=500;
+				if (this.id>=19) this.basePrice*=100000;
 				this.basePrice = Number(this.basePrice.toPrecision(2));
 				this.price=this.basePrice;
 				this.bulkPrice=this.price;
@@ -9280,7 +9280,7 @@ Game.Launch=function()
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
-			return me.baseCps*mult*2;
+			return me.baseCps*mult*5;
 		},function(){
 			Game.UnlockTiered(this);
 			if (this.amount>=Game.SpecialGrandmaUnlock && Game.Objects['Grandma'].amount>0) Game.Unlock(this.grandma.name);
@@ -9290,7 +9290,7 @@ Game.Launch=function()
 			var mult=1;
 			mult*=Game.GetTieredCpsMult(me);
 			mult*=Game.magicCpS(me.name);
-			return me.baseCps*mult*500;
+			return me.baseCps*mult*4000;
 		},function(){
 			Game.UnlockTiered(this);
 			if (this.amount>=Game.SpecialGrandmaUnlock && Game.Objects['Grandma'].amount>0) Game.Unlock(this.grandma.name);
